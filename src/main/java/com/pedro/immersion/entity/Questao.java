@@ -13,8 +13,10 @@ public class Questao {
     private EAreaConhecimento areaConhecimento;
     private EMateria materia;
 
-    private Boolean respostaCorreta;
+    private Boolean respostaCorreta = false;
 
     private String motivoErro;
+
+
 
 }

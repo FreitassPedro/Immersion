@@ -6,30 +6,28 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Data
-public class Simulado {
+public abstract class Simulado {
 
     private int id;
     private String name;
-    private int totalQuestoes;
-    private int totalAcertos;
-    private int totalErros;
 
     private LocalDateTime dataInicio;
     private LocalDateTime dataFinal;
 
-    private List<Questao> questoes = new ArrayList<>();
+    private List<Questao> questoes;
 
-    private List<SimuladoStats> simuladoStats = new ArrayList<>();
+    private SimuladoEstatistica simuladoEstatistica;
 
-    public void addSimuladoStats(SimuladoStats simuladoStats) {
-        this.simuladoStats.add(simuladoStats);
+    public abstract void calcularEstastisticas();
+
+    public void setQuestoes(List<Questao> questoes) {
+        this.questoes = questoes;
+        this.simuladoEstatistica = new SimuladoEstatistica();
+        this.simuladoEstatistica.setAreaStats(new ArrayList<>());
+        calcularEstastisticas();
     }
-
-    public void addQuestao(Questao questao) {
-        this.questoes.add(questao);
-    }
-
 
 
 }
