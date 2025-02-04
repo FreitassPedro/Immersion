@@ -13,14 +13,25 @@ public class SimuladoEnem extends Simulado {
 
     @Override
     public void calcularEstastisticas() {
-
-
-            registrarPorAreaConhecimento();
-
+            registrarStatsAreaConhecimento();
+            registrarStatsGeral();
     }
 
-    private void registrarPorAreaConhecimento() {
-        SimuladoEstatistica simuladoEstatistica = getSimuladoEstatistica();
+    private void registrarStatsGeral() {
+        SimuladoEstatistica statsGeral = getEstatisticas();
+
+        statsGeral.getAreaStats().forEach(stats -> {
+            statsGeral.setTotalAcertos(statsGeral.getTotalAcertos() + stats.getTotalAcertos());
+            statsGeral.setTotalErros(statsGeral.getTotalErros() + stats.getTotalErros());
+            statsGeral.setTotalQuestoes(statsGeral.getTotalQuestoes() + stats.getTotalQuestoes());
+            statsGeral.setPorcentagemAcertos(statsGeral.getTotalAcertos() * 100 / statsGeral.getTotalQuestoes());
+        });
+
+        this.setEstatisticas(statsGeral);
+    }
+
+    private void registrarStatsAreaConhecimento() {
+        SimuladoEstatistica simuladoEstatistica = getEstatisticas();
         List<AreaStats> areaStats = simuladoEstatistica.getAreaStats();
 
 

@@ -12,6 +12,7 @@ public class SimuladoEstatistica {
     private int totalQuestoes;
     private int totalAcertos;
     private int totalErros;
+    private float porcentagemAcertos;
 
 
 
@@ -28,6 +29,8 @@ public class SimuladoEstatistica {
     private void addQuestao() {
         totalQuestoes++;
     }
+
+
 
     public void addAreaStats(AreaStats areaStats) {
         if (this.areaStats == null) this.areaStats = new ArrayList<>();

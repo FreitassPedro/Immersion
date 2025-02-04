@@ -18,14 +18,14 @@ public abstract class Simulado {
 
     private List<Questao> questoes;
 
-    private SimuladoEstatistica simuladoEstatistica;
+    private SimuladoEstatistica estatisticas;
 
     public abstract void calcularEstastisticas();
 
     public void setQuestoes(List<Questao> questoes) {
         this.questoes = questoes;
-        this.simuladoEstatistica = new SimuladoEstatistica();
-        this.simuladoEstatistica.setAreaStats(new ArrayList<>());
+        this.estatisticas = new SimuladoEstatistica();
+        this.estatisticas.setAreaStats(new ArrayList<>());
         calcularEstastisticas();
     }
 

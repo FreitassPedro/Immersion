@@ -45,6 +45,9 @@ public class TesteController {
             questaos.add(questao);
         }
 
+        Questao questao = new Questao(11, 11, EAreaConhecimento.MATEMATICA, EMateria.MATEMATICA, true, "N/A");
+
+        questaos.add(questao);
         return questaos;
     }
 }
