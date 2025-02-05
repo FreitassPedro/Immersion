@@ -11,6 +11,8 @@ public class AreaStats {
     private int totalAcertos;
     private int totalErros;
 
+    public AreaStats() {
+    }
     public AreaStats(EAreaConhecimento areaConhecimento) {
         this.areaConhecimento = areaConhecimento;
     }

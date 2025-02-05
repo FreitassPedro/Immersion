@@ -6,10 +6,7 @@ import com.pedro.immersion.entity.SimuladoEnem;
 import com.pedro.immersion.entity.enums.EAreaConhecimento;
 import com.pedro.immersion.entity.enums.EMateria;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,6 +15,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/teste")
 public class TesteController {
+
+    @PostMapping()
+    private ResponseEntity<?> testePost(@RequestBody Simulado simulado) {
+        System.out.println(simulado);
+        return ResponseEntity.ok(simulado);
+    }
 
     @GetMapping
     public ResponseEntity<?> teste() {

@@ -2,6 +2,7 @@ package com.pedro.immersion.entity;
 
 import com.pedro.immersion.entity.enums.EAreaConhecimento;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -9,6 +10,10 @@ import java.util.stream.Collectors;
 public class SimuladoEnem extends Simulado {
 
     public SimuladoEnem() {
+    }
+
+    public SimuladoEnem(int id, String name, LocalDateTime dataInicio, LocalDateTime dataFinal, List<Questao> questoes, SimuladoEstatistica estatisticas) {
+        super(id, name,  dataInicio, dataFinal, questoes, estatisticas);
     }
 
     @Override
