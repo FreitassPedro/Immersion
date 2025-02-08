@@ -1,0 +1,23 @@
+
+.ciclo-box {
+    background-color: #fff;
+    border-radius: 0px 0px 6px 6px;
+    width: 100%;
+    height: 80px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 0 70px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    align-items: center;
+}
+
+.ciclo-stats {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+}
+
+

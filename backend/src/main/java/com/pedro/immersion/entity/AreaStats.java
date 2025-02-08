@@ -11,6 +11,8 @@ public class AreaStats {
     private int totalAcertos;
     private int totalErros;
 
+    private float porcentagemAcertos;
+
     public AreaStats() {
     }
     public AreaStats(EAreaConhecimento areaConhecimento) {
