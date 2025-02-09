@@ -1,6 +1,18 @@
+
+import { useEffect, useState } from "react";
 import "./styles.css";
 
 export const Ciclo = () => {
+    const [progress, setProgress] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setProgress((prev) => (prev >= 1 ? 1 : prev + 0.1));
+        }, 500);
+        return () => clearInterval(interval);
+    }, []);
+
+
     return (
         <div className="container" >
             <div className="d-flex justify-content-center">
@@ -61,13 +73,13 @@ export const Ciclo = () => {
                     <tbody>
                         <td>Matemática</td>
                         <td>1:30:00</td>
-                        <td><progress value={0.6} /></td>
+                        <td><progress value={0.4} max={1} /></td>
                         <td>🤢😺😻😨</td>
                     </tbody>
                     <tbody>
                         <td>Inglês</td>
                         <td>2:20:00</td>
-                        <td><progress value={0.9} /></td>
+                        <td><progress value={0.4} max={1} /></td>
                         <td>🤢😺😻😨</td>
                     </tbody>
                 </table>
