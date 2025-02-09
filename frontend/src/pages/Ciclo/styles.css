@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
 .ciclo-box {
     background-color: #fff;
@@ -20,4 +27,64 @@
     justify-content: space-around;
 }
 
+.ciclo-graph {
+    display: flex;
+    background-color: #fff;
+    border-radius: 6px;
+    width: 60%;
+}
 
+.ciclo-cards {
+
+    width: 300px;
+}
+
+.card {
+    display: flex;
+    margin: 10px 10px 10px 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+
+    .card-title {
+        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        span {
+            color: #8A92A6;
+            font-size: 12px;
+        }
+
+        i {
+            font-size: 16px;
+        }
+    }
+
+    .card-subtitle {
+        margin-left: 6px;
+
+    }
+
+    .card-icon {
+        display: flex;
+        margin-left: 0px;
+        align-items: center;
+    }
+
+    .card-text {
+        font-size: 20px;
+        align-content: center;
+        margin-left: 16px;
+    }
+
+    i {
+        font-size: 200%;
+
+    }
+}
