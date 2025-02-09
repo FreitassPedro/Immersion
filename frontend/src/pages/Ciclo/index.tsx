@@ -48,7 +48,7 @@ export const Ciclo = () => {
             </div>
 
             <div className="table-responsive ciclo-table">
-                <table className="table table-striped">
+                <table className="table">
                     <thead>
                         <tr>
                             <th scope="col">Matéria</th>
@@ -61,7 +61,13 @@ export const Ciclo = () => {
                     <tbody>
                         <td>Matemática</td>
                         <td>1:30:00</td>
-                        <td>-------- 60%</td>
+                        <td><progress value={0.6} /></td>
+                        <td>🤢😺😻😨</td>
+                    </tbody>
+                    <tbody>
+                        <td>Inglês</td>
+                        <td>2:20:00</td>
+                        <td><progress value={0.9} /></td>
                         <td>🤢😺😻😨</td>
                     </tbody>
                 </table>
