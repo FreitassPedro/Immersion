@@ -1,7 +1,13 @@
 import { ApexOptions } from "apexcharts";
 
 import Chart from "react-apexcharts";
-import  { useState } from "react";
+import { useState } from "react";
+
+const primaryColor = "#a41455";
+const secondaryColor = "#17030c";
+const labels = ["Português", "Matemática", "Biologia", "Química", "Física", "Inglês", "Literatura", "Redação"];
+const dadosMock = ["01:30:00", "02:15:00", "00:45:00", "03:00:00", "01:50:00", "02:30:00", "01:10:00", "02:00:00"];
+const metasMock = ["02:00:00", "02:30:00", "01:00:00", "03:30:00", "02:00:00", "03:00:00", "01:30:00", "02:15:00"];
 
 type ChartData = {
   labels: string[];
@@ -9,71 +15,89 @@ type ChartData = {
     x: string;
     y: number;
     goals: {
-      name: string;
       value: number;
-      strokeColor: string;
-    }
-  }
+      strokeColor: string
+    }[];
+  }[];
 };
+
+const timeToMinutes = (time: string): number => {
+  const [hh, mm, ss] = time.split(":").map(Number);
+  return hh * 60 + mm + ss / 60; // Converte para minutos
+};
+const minutesToTime = (minutes: number): string => {
+  const hh = Math.floor(minutes / 60);
+  const mm = Math.floor(minutes % 60);
+  return `${String(hh).padStart(2, "0")}:${String(mm).padStart(2, "0")}:00`;
+}
 
 export const CicloGraph = () => {
   const [state, setState] = useState<ChartData>({
-    labels: ["Português", "Matemática", "Biologia", "Quimica", "Física", "Ingês","Literatura", "Redação"],
-    series: [
-      {x: "Portugues", y: 1200, goals: [{name: "Objetivo", value: 2000, strokeColor: "#142952"}]},
-      {x: "Matemática", y: 5400, goals: [{name: "Objetivo", value: 5400, strokeColor: "#142952"}]},
-      {x: "Biologia", y: 5200, goals: [{name: "Objetivo", value: 5200, strokeColor: "#142952"}]},
-      {x: "Quimica", y: 6500, goals: [{name: "Objetivo", value: 6500, strokeColor: "#142952"}]},
-      {x: "Física", y: 6600, goals: [{name: "Objetivo", value: 6600, strokeColor: "#142952"}]},
-      {x: "Ingês", y: 120, goals: [{name: "Objetivo", value: 7500, strokeColor: "#142952"}]},
-      {x: "Literatura", y: 8700, goals: [{name: "Objetivo", value: 8700, strokeColor: "#142952"}]},
-    ],
+    labels,
+    series: labels.map((xLabel, index) => ({
+      x: xLabel,
+      y: timeToMinutes(dadosMock[index]),
+      goals: [{ name: "Meta", value: timeToMinutes(metasMock[index]), strokeColor: secondaryColor }],
+    })),
+
 
   });
+  
 
 
   const options: ApexOptions = {
     chart: {
       type: 'bar',
     },
+    
     plotOptions: {
       bar: {
         columnWidth: "40%",
       },
     },
-    colors: ["#3366cc"],
+    colors: [primaryColor],
     dataLabels: {
       enabled: false,
     },
+    
     legend: {
       show: true,
       showForSingleSeries: true,
       customLegendItems: ["Tempo Estudado", "Objetivo"],
       markers: {
-        fillColors: ["#3366cc", "#775DD0"],
+        fillColors: [primaryColor, secondaryColor],
       },
     },
     xaxis: {
       categories: state.labels,
+      labels: {
+        rotate: -45,
+        trim: false,
+        rotateAlways: true,
+      },
     },
     yaxis: {
       title: {
-        text: "Horas",
+        text: "Tempo (hh:mm)",
       },
+      labels: {
+        formatter: (value) => minutesToTime(value as number),
+      },
+
     },
-    
+
 
   };
 
-return (
-  <div id="chart">
-    <Chart
-      options={options}
-      series={[{name: "Horas", data: state.series}]}
-      type='bar'
-      height={350}
-      width={500}
-    />
-  </div>
-);
+  return (
+    <div id="chart" style={{ width: "100%" }}>
+      <Chart
+        options={options}
+        series={[{ name: "Horas", data: state.series }]}
+        type='bar'
+        height={350}
+   
+      />
+    </div>
+  );
 };

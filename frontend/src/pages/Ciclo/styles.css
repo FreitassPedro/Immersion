@@ -25,7 +25,6 @@
     justify-content: space-between;
     width: 90%;
     align-items: center;
-    
 }
 
 .ciclo-graph {
@@ -34,14 +33,15 @@
     border-radius: 6px;
     width: 60%;
 
-    img {
+    .ciclo-graph-bar {
+        display: flex;
         width: 100%;
     }
 }
 
 .ciclo-cards {
 
-    width: 25%
+    width: 30%
 }
 
 .card {
@@ -101,7 +101,7 @@
     thead th {
         background-color: #F5F6FA;
         font-size: 12px;
-        color: #8A92A6;
+        color: #a33969;
         font-weight: 400;
         text-align: center;
         padding: 10px;
@@ -130,7 +130,7 @@
       }
       
       progress::-webkit-progress-value {
-        background-color: #13064e;
+        background-color: #a41455;
         border-radius: 10px;
       }
       
