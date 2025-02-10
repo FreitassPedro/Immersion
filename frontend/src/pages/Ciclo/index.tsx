@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react";
 import "./styles.css";
+import { CicloGraph } from "../../components/CicloGraph";
 
 export const Ciclo = () => {
     const [progress, setProgress] = useState(0);
@@ -24,7 +25,7 @@ export const Ciclo = () => {
             <div className="d-flex justify-content-center">
                 <div className="ciclo-stats">
                     <div className="ciclo-graph">
-                        <img src="./src/assets/images/image.png" alt="" />
+                        <CicloGraph />
                     </div>
                     <div className="ciclo-cards">
                         <div className="card">
@@ -38,6 +39,20 @@ export const Ciclo = () => {
                                         <i className="fa-thin fa-mug-hot"></i>
                                     </div>
                                     <p className="card-text">2 dias</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div className="card-body">
+                                <div className="card-title">
+                                    <span className="card-title">Líquido do dia</span>
+                                    <i className="fa-duotone fa-light fa-circle-info"></i>
+                                </div>
+                                <div className="d-flex card-subtitle">
+                                    <div className="card-icon">
+                                        <i className="fa-thin fa-watch"></i>
+                                    </div>
+                                    <p className="card-text">4:12:00</p>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +94,7 @@ export const Ciclo = () => {
                     <tbody>
                         <td>Inglês</td>
                         <td>2:20:00</td>
-                        <td><progress value={0.4} max={1} /></td>
+                        <td><progress value={0.6} max={1} /></td>
                         <td>🤢😺😻😨</td>
                     </tbody>
                 </table>
