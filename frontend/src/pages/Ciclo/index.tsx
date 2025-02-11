@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import "./styles.css";
 import { CicloGraph } from "../../components/CicloGraph";
+import { SideBar } from "../../components/SideBar";
 
 export const Ciclo = () => {
     const [progress, setProgress] = useState(0);
@@ -15,7 +16,9 @@ export const Ciclo = () => {
 
 
     return (
-        <div className="container-xxl" >
+        <>
+        <SideBar />
+        <div className="container-xl" >
             <div className="d-flex justify-content-center">
                 <div className="ciclo-box">
                     <h1>Ciclo: { }</h1>
@@ -106,8 +109,34 @@ export const Ciclo = () => {
                         <td><progress value={0.6} max={1} /></td>
                         <td>🤢😺😻😨</td>
                     </tbody>
+                    <tbody>
+                        <td>Inglês</td>
+                        <td>2:20:00</td>
+                        <td><progress value={0.6} max={1} /></td>
+                        <td>🤢😺😻😨</td>
+                    </tbody>
+                    <tbody>
+                        <td>Inglês</td>
+                        <td>2:20:00</td>
+                        <td><progress value={0.6} max={1} /></td>
+                        <td>🤢😺😻😨</td>
+                    </tbody>
+                    <tbody>
+                        <td>Inglês</td>
+                        <td>2:20:00</td>
+                        <td><progress value={0.6} max={1} /></td>
+                        <td>🤢😺😻😨</td>
+                    </tbody>
+                    <tbody>
+                        <td>Inglês</td>
+                        <td>2:20:00</td>
+                        <td><progress value={0.6} max={1} /></td>
+                        <td>🤢😺😻😨</td>
+                    </tbody>
                 </table>
             </div>
         </div>
+        
+        </>
     )
 };

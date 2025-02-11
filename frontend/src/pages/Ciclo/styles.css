@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-.container-xxl {
+.container-xl {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-left: 270px;
+
 }
 
 .ciclo-box {
@@ -31,7 +33,7 @@
 }
 
 .ciclo-graph {
-    display: flex;
+    flex: auto;
     background-color: #fff;
     border-radius: 6px;
     width: 60%;
@@ -43,8 +45,9 @@
 }
 
 .ciclo-cards {
-
-    width: 30%
+    flex: 1; /* Para garantir que se ajuste bem */
+    min-width: 250px;
+    max-width: 40%;
 }
 
 .card {
@@ -52,6 +55,8 @@
     height: auto;
     margin: 10px 10px 10px 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 300px; /* Define um limite */
 
     .card-body {
         display: flex;
