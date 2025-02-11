@@ -3,16 +3,19 @@ body {
     padding: 0;
 }
 
-.sidebar {
+.sidebar {    
     margin: 20px 0px 0px 15px;
+    left: 0;
 
+    position: fixed;
     background-color: aliceblue;
     box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
     position: absolute;
     border-radius: 20px;
-    height: 50vh;
+    height: 60vh;
     width: 240px;
     overflow: hidden;
+    overflow-y: auto;
 }
 
 .nav-header {
