@@ -15,7 +15,7 @@ export const Ciclo = () => {
 
 
     return (
-        <div className="container-xl" >
+        <div className="container-xxl" >
             <div className="d-flex justify-content-center">
                 <div className="ciclo-box">
                     <h1>Ciclo: { }</h1>

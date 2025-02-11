@@ -59,15 +59,6 @@ export const CicloGraph = () => {
     dataLabels: {
       enabled: false,
     },
-    
-    legend: {
-      show: true,
-      showForSingleSeries: true,
-      customLegendItems: ["Tempo Estudado", "Objetivo"],
-      markers: {
-        fillColors: [primaryColor, secondaryColor],
-      },
-    },
     xaxis: {
       categories: state.labels,
       labels: {
