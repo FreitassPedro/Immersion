@@ -17,7 +17,9 @@ export const Ciclo = () => {
 
     return (
         <>
+   
         <SideBar />
+
         <div className="container-xl" >
             <div className="d-flex justify-content-center">
                 <div className="ciclo-box">

@@ -3,68 +3,70 @@
 .container-xl {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    margin-left: 270px;
-<<<<<<< HEAD
+    gap: 1.25rem;
+    width: calc(100% - 16rem);
+    margin-left: 16rem;
+    min-width: 100vh;
 
-=======
->>>>>>> ed2c1fb75b798024085084c032a12bc7e36fd17d
 }
+
 
 .ciclo-box {
     background-color: #fff;
-    border-radius: 0px 0px 6px 6px;
+    border-radius: 6px;
     width: 100%;
-    height: 50px;
+    height: 2.5rem;
     display: flex;
-    padding: 0 20px;
-    box-shadow: 0 0 70px rgba(0, 0, 0, 0.1);
+    padding: 0 1rem;
+    box-shadow: 0 0 4rem rgba(0, 0, 0, 0.1);
     justify-content: center;
     align-items: center;
     text-align: center;
-    h1 {
-        font-size: 20px;
-        color: #8A92A6;
-    }
+
+}
+
+.ciclo-box h1 {
+    font-size: 1.25rem;
+    color: #676c79;
+
 }
 
 .ciclo-stats {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: space-around;
     width: 90%;
     align-items: center;
 }
 
 .ciclo-graph {
-    flex: auto;
+    flex: 1;
     background-color: #fff;
     border-radius: 6px;
-    width: 60%;
-
-    .ciclo-graph-bar {
-        display: flex;
-        width: 100%;
-    }
+    min-width: 50%;
+    max-width: 60%;
 }
 
 .ciclo-cards {
-    flex: 1; /* Para garantir que se ajuste bem */
-    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    min-width: 11rem;
     max-width: 40%;
 }
 
 .card {
     display: flex;
     height: auto;
-    margin: 10px 10px 10px 10px;
+    margin: 0.625rem;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 300px; /* Define um limite */
+    max-width: 20rem;
+    /* Define um limite */
 
     .card-body {
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: 0.3rem
     }
 
 
@@ -72,32 +74,27 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-
-        span {
-            color: #8A92A6;
-            font-size: 12px;
-        }
+        font-size: 0.75rem;
+        color: #8A92A6;
 
         i {
-            font-size: 16px;
+            font-size: 1rem;
         }
     }
 
     .card-subtitle {
-        margin-left: 6px;
-
+        margin-left: 0.3rem
     }
 
     .card-icon {
         display: flex;
-        margin-left: 0px;
         align-items: center;
     }
 
     .card-text {
-        font-size: 20px;
+        font-size: 1.25rem;
         align-content: center;
-        margin-left: 16px;
+        margin-left: 1rem;
     }
 
     i {
@@ -109,50 +106,50 @@
         align-items: center;
         justify-content: center;
         display: flex;
-        gap: 40px;
+        gap: 2.5rem;
     }
 }
 
 .table {
-    box-shadow: 0 4px 8px hwb(0 0% 100% / 0.1); /* Sombra suave */
-    
-    thead th {
-        background-color: #F5F6FA;
-        font-size: 12px;
-        color: #a33969;
-        font-weight: 400;
-        text-align: center;
-        padding: 10px;
-    }
+    box-shadow: 0 4px 8px hwb(0 0% 100% / 0.1);
+    /* Sombra suave */
 
-
-    tbody td {
-        background-color: #fcfcfd;
-       
-        height: 50px;
-        font-size: 16px;
-        color: #454546;
-        font-weight: 300;
-        text-align: center;
-        vertical-align: middle;    /* Alinhamento vertical ao meio */
-    }
-
-    progress {
-        width: 60%;
-        height: 20px;
-        
-    }
-    progress::-webkit-progress-bar {
-        background-color: #f3f3f3;
-        border-radius: 10px;
-      }
-      
-      progress::-webkit-progress-value {
-        background-color: #a41455;
-        border-radius: 10px;
-      }
-      
-      
 }
 
-  
+.table thead th {
+    background-color: #F5F6FA;
+    font-size: 0.75rem;
+    color: #a33969;
+    font-weight: 400;
+    text-align: center;
+    padding: 0.6rem
+}
+
+
+.table tbody td {
+    background-color: #fcfcfd;
+
+    height: 3rem;
+    font-size: 16px;
+    color: #454546;
+    font-weight: 300;
+    text-align: center;
+    vertical-align: middle;
+    /* Alinhamento vertical ao meio */
+}
+
+progress {
+    width: 60%;
+    height: 1.4rem;
+
+}
+
+progress::-webkit-progress-bar {
+    background-color: #f3f3f3;
+    border-radius: 0.625rem;
+}
+
+progress::-webkit-progress-value {
+    background-color: #a41455;
+    border-radius: 0.625rem;
+}
