@@ -15,10 +15,10 @@ export const Ciclo = () => {
 
 
     return (
-        <div className="container" >
+        <div className="container-xl" >
             <div className="d-flex justify-content-center">
                 <div className="ciclo-box">
-                    <h1>Ciclo</h1>
+                    <h1>Ciclo: { }</h1>
                 </div>
             </div>
 
@@ -45,14 +45,22 @@ export const Ciclo = () => {
                         <div className="card">
                             <div className="card-body">
                                 <div className="card-title">
-                                    <span className="card-title">Líquido do dia</span>
+                                    <span className="card-title">Foco x Produtividade</span>
                                     <i className="fa-duotone fa-light fa-circle-info"></i>
                                 </div>
-                                <div className="d-flex card-subtitle">
-                                    <div className="card-icon">
-                                        <i className="fa-thin fa-watch"></i>
+                                <div className="d-flex card-foco-prod">
+                                    <div className="d-flex card-subtitle">
+                                        <div className="card-icon">
+                                            <i className="fa-sharp fa-light fa-eye-slash"></i>
+                                        </div>
+                                        <p className="card-text">4</p>
                                     </div>
-                                    <p className="card-text">4:12:00</p>
+                                    <div className="d-flex card-subtitle">
+                                        <div className="card-icon">
+                                            <i className="fa-sharp fa-light fa-brain"></i>
+                                        </div>
+                                        <p className="card-text">3.87</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -70,6 +78,7 @@ export const Ciclo = () => {
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
