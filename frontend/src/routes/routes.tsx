@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { Home } from '../pages/Home';
 import { Ciclo } from '../pages/Ciclo';
 import { SideBar } from '../components/SideBar';
-import { CicloRegister } from '../components/CicloRegister';
+import CicloRegister from '../components/CicloRegister';
 
 export const AppRoutes = () => {
 
