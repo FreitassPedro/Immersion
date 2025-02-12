@@ -69,6 +69,11 @@ export const CicloGraph = () => {
     },
     yaxis: {
       title: {
+        style: {
+          fontSize: "14px",
+          fontWeight: 400,
+          fontFamily: "Inter, sans-serif",
+        },
         text: "Tempo (hh:mm)",
       },
       labels: {
@@ -81,12 +86,12 @@ export const CicloGraph = () => {
   };
 
   return (
-    <div id="chart" style={{ width: "100%" }}>
+    <div id="chart">
       <Chart
         options={options}
         series={[{ name: "Horas", data: state.series }]}
         type='bar'
-        height={350}
+        height={'100%'}
    
       />
     </div>

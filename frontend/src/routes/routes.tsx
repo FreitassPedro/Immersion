@@ -1,8 +1,8 @@
 import {} from 'react-router-dom';
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { Home } from './pages/Home';
-import { Ciclo } from './pages/Ciclo';
-import { SideBar } from './components/SideBar';
+import { Home } from '../pages/Home';
+import { Ciclo } from '../pages/Ciclo';
+import { SideBar } from '../components/SideBar';
 
 export const AppRoutes = () => {
 

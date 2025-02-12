@@ -1,17 +1,22 @@
+:root {
+    --primary-color: #d4c286;
+    --secondary-color: #4b4b4b;
+    --tertiary-color: #e7dede;
+}
+
 body {
     margin: 0;
     padding: 0;
 }
 .sidebar {
-    width: 240px;
-    min-width: 240px; /* Define um limite mínimo */
+    min-width: 14rem; /* Define um limite mínimo */
     max-width: 240px; /* Define um limite máximo */
     height: 100vh; /* Fixa a altura do sidebar */
     overflow-y: auto; /* Adiciona scroll interno se necessário */
     position: fixed;
     left: 0;
     top: 0;
-    background: #f8f9fa;
+    background: var(--tertiary-color);
     transition: width 0.3s ease-in-out;
 }
 
@@ -20,13 +25,13 @@ body {
     align-items: center;
     justify-content: space-around;
     height: 65px;
-    background-color: #e0e0e0;
+    background-color: var(--primary-color);
 
 }
 
 .nav-header h1 {
     font-family: 'Courier New', Courier, monospace;
-    font-size: 30px;
+    font-size: 1.8rem;
 }
 
 hr {
@@ -36,7 +41,7 @@ hr {
     
 }
 .nav-content {
-    gap: 20px;
+    gap: 1.2rem;
     display: flex;
     flex-direction: column;
 }
@@ -46,7 +51,7 @@ hr {
     align-items: center;
     /* Centraliza verticalmente os itens dentro da nav-item */
     margin-left: 20px;
-    font-size: 20px;
+    font-size: 1rem;
 }
 
 .nav-item a {
@@ -59,7 +64,7 @@ hr {
 }
 
 .nav-item i {
-    font-size: 24px;
+    font-size: 1rem;
     width: 32px;
     height: 32px;
 
@@ -79,9 +84,9 @@ hr {
     position: absolute;
     bottom: 0;
     width: 100%;
-    background-color: #f0f0f0;
-    border-radius: 20px;
-    height: 65px;
+    background-color: var(--primary-color);
+    border-radius: 1rem 1rem 0 0;
+    height: 4rem;
     display: flex;
     justify-content: space-around;
 
