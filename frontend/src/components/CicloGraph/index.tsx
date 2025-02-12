@@ -94,13 +94,13 @@ export const CicloGraph = () => {
   };
 
   return (
-    <div id="chart" >
+    <div id="chart" style={{ width: "100%" }}>
       <Chart
         options={options}
         series={[{ name: "Horas", data: state.series }]}
         type='bar'
-      height={400}
-      
+        height={350}
+   
       />
     </div>
   );
