@@ -28,7 +28,7 @@ const timeToMinutes = (time: string): number => {
 const minutesToTime = (minutes: number): string => {
   const hh = Math.floor(minutes / 60);
   const mm = Math.floor(minutes % 60);
-  return `${String(hh).padStart(2, "0")}:${String(mm).padStart(2, "0")}:00`;
+  return `${String(hh).padStart(2, "0")}:${String(mm).padStart(2, "0")}`;
 }
 
 export const CicloGraph = () => {
@@ -50,6 +50,9 @@ export const CicloGraph = () => {
       type: 'bar',
     },
     
+    legend: {
+      fontFamily: "Inter, sans-serif",
+    },
     plotOptions: {
       bar: {
         columnWidth: "40%",
@@ -77,6 +80,11 @@ export const CicloGraph = () => {
         text: "Tempo (hh:mm)",
       },
       labels: {
+        style: {
+          fontSize: "12px",
+          fontWeight: 300,
+          fontFamily: "Inter, sans-serif",
+        },
         formatter: (value) => minutesToTime(value as number),
       },
 

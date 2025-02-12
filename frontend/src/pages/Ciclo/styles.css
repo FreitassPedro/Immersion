@@ -52,9 +52,11 @@ hr {
     min-width: 50%;
     width: 70%;
     max-width: 80%;
+    box-shadow: 0 0 4rem rgba(0, 0, 0, 0.1);
 }
 
 .ciclo-graph h2 {
+    text-align: center;
     font-size: 1.25rem;
     color: #676c79;
 }
@@ -144,9 +146,7 @@ hr {
 
 
 .table tbody td {
-    background-color: #fcfcfd;
-
-    height: 3rem;
+    height: 3.1rem;
     font-size: 16px;
     color: #454546;
     font-weight: 300;
@@ -155,10 +155,18 @@ hr {
     /* Alinhamento vertical ao meio */
 }
 
+.table tbody tr:nth-child(odd) td {
+    background-color: #f7f7f7; /* Cor X */
+}
+
+.table tbody tr:nth-child(even) td{
+    background-color: #e6e6e6; /* Cor Y */
+}
+
+
 progress {
     width: 60%;
-    height: 1.4rem;
-
+    height: 1.5rem;
 }
 
 progress::-webkit-progress-bar {
