@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
-.container-xl {
+:root {
+    --primary-color: #d4c286;
+    --secondary-color: #4b4b4b;
+    --tertiary-color: #e7dede;
+}
+.container {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
@@ -10,8 +14,13 @@
 
 }
 
+hr {
+    border-top: solid 1px #4b4b4b;
+    width: 100%;
+    margin: 0;
+}
 
-.ciclo-box {
+.ciclo-title {
     background-color: #fff;
     border-radius: 6px;
     width: 100%;
@@ -22,13 +31,11 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-
 }
 
-.ciclo-box h1 {
+.ciclo-title h1 {
     font-size: 1.25rem;
     color: #676c79;
-
 }
 
 .ciclo-stats {
@@ -40,12 +47,22 @@
 }
 
 .ciclo-graph {
-    flex: 1;
     background-color: #fff;
-    border-radius: 6px;
+    border-radius: 8px;
     min-width: 50%;
-    max-width: 60%;
+    width: 70%;
+    max-width: 80%;
 }
+
+.ciclo-graph h2 {
+    font-size: 1.25rem;
+    color: #676c79;
+}
+
+.ciclo-graph-box {
+    padding: 0.8rem 0 0.5rem 1rem;
+}
+
 
 .ciclo-cards {
     display: flex;
@@ -75,7 +92,7 @@
         justify-content: space-between;
         align-items: center;
         font-size: 0.75rem;
-        color: #8A92A6;
+        color: var(--secondary-color);
 
         i {
             font-size: 1rem;
@@ -117,9 +134,9 @@
 }
 
 .table thead th {
-    background-color: #F5F6FA;
-    font-size: 0.75rem;
-    color: #a33969;
+    background-color: var(--primary-color);
+    font-size: 0.9rem;
+    color: var(--secondary-color);
     font-weight: 400;
     text-align: center;
     padding: 0.6rem
@@ -150,6 +167,6 @@ progress::-webkit-progress-bar {
 }
 
 progress::-webkit-progress-value {
-    background-color: #a41455;
+    background-color: var(--secondary-color);
     border-radius: 0.625rem;
 }
