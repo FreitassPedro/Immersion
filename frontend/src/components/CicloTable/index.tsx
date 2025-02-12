@@ -60,5 +60,6 @@ export const CicloTable = () => {
                 </tbody>
             </table>
         </div>
+
     );
 }
