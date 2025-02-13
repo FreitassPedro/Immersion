@@ -1,3 +1,4 @@
+import { cicloTableData } from "../../data/cicloTableData";
 
 export const CicloTable = () => {
 
@@ -15,48 +16,16 @@ export const CicloTable = () => {
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td ><i className="fa-solid fa-play" /></td>
-                        <td>Matemática</td>
-                        <td>1:30:00</td>
-                        <td><progress value={0.4} max={1} /></td>
-                        <td>🤢😺😻😨</td>
-                    </tr>
-                    <tr>
-                        <td><i className="fa-solid fa-play" /></td>
-                        <td>Inglês</td>
-                        <td>2:20:00</td>
-                        <td><progress value={0.6} max={1} /></td>
-                        <td>🤢😺😻😨</td>
-                    </tr>
-                    <tr>
-                        <td><i className="fa-solid fa-play" /></td>
-                        <td>Inglês</td>
-                        <td>2:20:00</td>
-                        <td><progress value={0.6} max={1} /></td>
-                        <td>🤢😺😻😨</td>
-                    </tr>
-                    <tr>
-                        <td><i className="fa-solid fa-play" /></td>
-                        <td>Inglês</td>
-                        <td>2:20:00</td>
-                        <td><progress value={0.6} max={1} /></td>
-                        <td>🤢😺😻😨</td>
-                    </tr>
-                    <tr>
-                        <td><i className="fa-solid fa-play" /></td>
-                        <td>Inglês</td>
-                        <td>2:20:00</td>
-                        <td><progress value={0.6} max={1} /></td>
-                        <td>🤢😺😻😨</td>
-                    </tr>
-                    <tr>
-                        <td><i className="fa-solid fa-play" /></td>
-                        <td>Inglês</td>
-                        <td>2:20:00</td>
-                        <td><progress value={0.6} max={1}/></td>
-                        <td>🤢😺😻😨</td>
-                    </tr>
+                    {cicloTableData.map((item) => (
+                        <tr key={item.id}>
+                            <td><i className="fa-solid fa-play" /></td>
+                            <td>{item.materia}</td>
+                            <td>{item.horasFeitas}/{item.horasTotais}</td>
+                            <td><progress value={item.progresso} max={1} /></td>
+                            <td>{item.tags}</td>
+                        </tr>    
+                    ))}
+                   
                 </tbody>
             </table>
         </div>
