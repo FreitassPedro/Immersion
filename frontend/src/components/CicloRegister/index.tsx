@@ -1,29 +1,68 @@
 import './styles.css';
+import React, { FC, FormEvent } from 'react';
+import { NovoRegistro } from '../CicloTable/novoRegistro';
 
-const CicloRegister = () => {
+
+type CicloRegisterProps = {
+    isOpen: boolean;
+    onClose: () => void;
+    onItemAdd: (novoRegistro: NovoRegistro) => void;
+}
+
+export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onItemAdd }) => {
+    if (!isOpen) {
+        return null;
+    }
+
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+    
+        const form = event.target as HTMLFormElement;
+
+        const novoRegistro: NovoRegistro = {
+            id: Math.random(),
+            materia: form.materia.value,
+            horasPausa: form.horasPausa.value,
+            horasFeitas: form.horasFeitas.value,
+            progresso: 0,
+            tags: form.tags.value
+        };
+
+
+        onItemAdd(novoRegistro);
+        onClose();
+    }
+
     return (
         <div className='ciclo-register'>
-            <div className='form-container'>
-                <form>
+
+            <div>
+
+                <form onSubmit={handleSubmit}>
                     <h1>Registrar</h1>
                     <span>Insira informações sobre</span>
                     <div className="form-group">
                         <label>
                             <div className="input-group">
                                 <span>Data</span>
-                                <input type="date" placeholder="Selecione a data" />
+
+                                <input type="date" placeholder="Selecione a data" name="date"/>
                             </div>
                         </label>
                         <label>
                             <div className="input-group">
                                 <span>Liquido</span>
-                                <input type="number" placeholder="Digite o valor líquido" />
+
+                                <input type="number" placeholder="Digite o valor líquido" name="horasFeitas"/>
+
                             </div>
                         </label>
                         <label>
                             <div className="input-group">
                                 <span>Pausa</span>
-                                <input type="number" placeholder="Digite o tempo de pausa" />
+
+                                <input type="number" placeholder="Digite o tempo de pausa" name="horasPausa" />
+
                             </div>
                         </label>
                     </div>
@@ -31,7 +70,9 @@ const CicloRegister = () => {
                         <label>
                             <div className="input-group">
                                 <span>Matéria</span>
-                                <input type="text" placeholder="Digite a matéria" />
+
+                                <input type="text" placeholder="Digite a matéria" name="materia"/>
+
                             </div>
                         </label>
                     </div>
@@ -40,7 +81,8 @@ const CicloRegister = () => {
                             <div className="input-group">
                                 <span>Método de estudo</span>
                                 <select name="metodo" id="metodo">
-                                    <option value="" placeholder="Selecione o método">Selecione o método</option> {/* Placeholder no select */}
+
+                                    <option value="">Selecione o método</option> {/* Placeholder no select */}
                                     <option value="video">Vídeo</option>
                                     <option value="exercicios">Exercícios</option>
                                     <option value="leitura">Leitura</option>
@@ -55,7 +97,8 @@ const CicloRegister = () => {
                             <div className="input-group">
                                 <span>Tags</span>
                                 <select name="tags" id="tags">
-                                    <option value="" placeholder="Selecione a tag">Selecione a tag</option> {/* Placeholder no select */}
+                                    <option value="">Selecione a tag</option> {/* Placeholder no select */}
+
                                     <option value="revisar">Revisar</option>
                                     <option value="falta-atencao">Falta atenção</option>
                                     <option value="finalizado">Finalizado</option>
