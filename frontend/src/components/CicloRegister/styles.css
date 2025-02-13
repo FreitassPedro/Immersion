@@ -7,8 +7,10 @@
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
+
     align-items: center;
     z-index: 1000; /* Garante que o overlay fique por cima de outros conteúdos */
+
 }
 
 form {

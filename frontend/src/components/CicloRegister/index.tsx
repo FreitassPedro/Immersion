@@ -2,6 +2,7 @@ import './styles.css';
 import React, { FC, FormEvent } from 'react';
 import { NovoRegistro } from '../CicloTable/novoRegistro';
 
+
 type CicloRegisterProps = {
     isOpen: boolean;
     onClose: () => void;
@@ -44,19 +45,24 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onItemA
                         <label>
                             <div className="input-group">
                                 <span>Data</span>
+
                                 <input type="date" placeholder="Selecione a data" name="date"/>
                             </div>
                         </label>
                         <label>
                             <div className="input-group">
                                 <span>Liquido</span>
+
                                 <input type="number" placeholder="Digite o valor líquido" name="horasFeitas"/>
+
                             </div>
                         </label>
                         <label>
                             <div className="input-group">
                                 <span>Pausa</span>
+
                                 <input type="number" placeholder="Digite o tempo de pausa" name="horasPausa" />
+
                             </div>
                         </label>
                     </div>
@@ -64,7 +70,9 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onItemA
                         <label>
                             <div className="input-group">
                                 <span>Matéria</span>
+
                                 <input type="text" placeholder="Digite a matéria" name="materia"/>
+
                             </div>
                         </label>
                     </div>
@@ -73,6 +81,7 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onItemA
                             <div className="input-group">
                                 <span>Método de estudo</span>
                                 <select name="metodo" id="metodo">
+
                                     <option value="">Selecione o método</option> {/* Placeholder no select */}
                                     <option value="video">Vídeo</option>
                                     <option value="exercicios">Exercícios</option>
@@ -89,6 +98,7 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onItemA
                                 <span>Tags</span>
                                 <select name="tags" id="tags">
                                     <option value="">Selecione a tag</option> {/* Placeholder no select */}
+
                                     <option value="revisar">Revisar</option>
                                     <option value="falta-atencao">Falta atenção</option>
                                     <option value="finalizado">Finalizado</option>
