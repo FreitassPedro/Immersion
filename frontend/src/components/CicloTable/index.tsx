@@ -20,12 +20,11 @@ export const CicloTable = () => {
                         <tr key={item.id}>
                             <td><i className="fa-solid fa-play" /></td>
                             <td>{item.materia}</td>
-                            <td>{item.horasFeitas}/{item.horasTotais}</td>
+                            <td>{item.horasFeitas}/{item.horasMeta}</td>
                             <td><progress value={item.progresso} max={1} /></td>
                             <td>{item.tags}</td>
                         </tr>    
                     ))}
-                   
                 </tbody>
             </table>
         </div>

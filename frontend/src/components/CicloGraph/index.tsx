@@ -1,13 +1,11 @@
 import { ApexOptions } from "apexcharts";
 
 import Chart from "react-apexcharts";
-import { useState } from "react";
+
+import { cicloTableData } from "../../data/cicloTableData";
 
 const primaryColor = "#a41455";
 const secondaryColor = "#17030c";
-const labels = ["Português", "Matemática", "Biologia", "Química", "Física", "Inglês", "Literatura", "Redação"];
-const dadosMock = ["01:30:00", "02:15:00", "00:45:00", "03:00:00", "01:50:00", "02:30:00", "01:10:00", "02:00:00"];
-const metasMock = ["02:00:00", "02:30:00", "01:00:00", "03:30:00", "02:00:00", "03:00:00", "01:30:00", "02:15:00"];
 
 type ChartData = {
   labels: string[];
@@ -21,6 +19,8 @@ type ChartData = {
   }[];
 };
 
+
+
 const timeToMinutes = (time: string): number => {
   const [hh, mm, ss] = time.split(":").map(Number);
   return hh * 60 + mm + ss / 60; // Converte para minutos
@@ -32,24 +32,22 @@ const minutesToTime = (minutes: number): string => {
 }
 
 export const CicloGraph = () => {
-  const [state, setState] = useState<ChartData>({
-    labels,
-    series: labels.map((xLabel, index) => ({
-      x: xLabel,
-      y: timeToMinutes(dadosMock[index]),
-      goals: [{ name: "Meta", value: timeToMinutes(metasMock[index]), strokeColor: secondaryColor }],
-    })),
+  const labels = cicloTableData.map(item => item.materia);
+  const horasFeitas = cicloTableData.map(item => item.horasFeitas);
+  const horasMeta = cicloTableData.map(item => item.horasMeta);
 
-
-  });
-  
-
+  // Cálculo do 'series' baseado nos dados estáticos
+  const series = labels.map((xLabel, index) => ({
+    x: xLabel,
+    y: timeToMinutes(horasFeitas[index]),
+    goals: [{ name: "Meta", value: timeToMinutes(horasMeta[index]), strokeColor: secondaryColor }],
+  }));
 
   const options: ApexOptions = {
     chart: {
       type: 'bar',
     },
-    
+
     legend: {
       fontFamily: "Inter, sans-serif",
     },
@@ -63,7 +61,7 @@ export const CicloGraph = () => {
       enabled: false,
     },
     xaxis: {
-      categories: state.labels,
+      categories: labels,
       labels: {
         rotate: -45,
         trim: false,
@@ -97,10 +95,10 @@ export const CicloGraph = () => {
     <div id="chart" style={{ width: "100%" }}>
       <Chart
         options={options}
-        series={[{ name: "Horas", data: state.series }]}
+        series={[{ name: "Horas", data: series }]}
         type='bar'
         height={350}
-   
+
       />
     </div>
   );
