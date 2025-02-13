@@ -1,49 +1,59 @@
 .ciclo-register {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    z-index: 1000; /* Garante que o overlay fique por cima de outros conteúdos */
 }
 
 form {
     display: flex;
     flex-direction: column;
+    
     gap: 1rem;
-    width: 100%;
-    max-width: 600px;
+    width: 500px;
     padding: 2rem;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
-.input-group {
+label {
+    width: 100%;
+}
+.form-group {
     display: flex;
-    align-items: center;
     gap: 1rem;
 }
+.input-group {
+    display: grid;
+    grid-template-columns: 1fr; /* Garante que o input ocupa 1 fração do espaço */
 
-.input-group span {
-    flex: 0 0 auto;
-    width: 20%; /* Ajuste conforme necessário */
+    align-items: center;
+}
+input {
+    width: 100%;
+    border: #d4d4d4 solid 1px;
+    border-radius: 4px;
 }
 
 .input-group input,
 .input-group select {
-    flex: 1;
-    width: 80%; /* Ajuste conforme necessário */
+    height: 2.5rem;
+    width: 100%;
+    border: #d4d4d4 solid 1px;
+    border-radius: 4px;
 }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
 
 .form-actions {
     display: flex;
     justify-content: space-around;
-    gap: 1rem;
+    padding-top: 5rem;
 }
 
 button {
