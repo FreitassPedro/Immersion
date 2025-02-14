@@ -1,16 +1,20 @@
 import { useState } from "react";
 
-const TimeInput = () => {
+const TimeInput = ({onChange}:
+    {
+        onChange: (hours: number, minutes: number, seconds: number) => void;
+    }
+) => {
 
-    // regex: ^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$
     const [hours, setHours] = useState<number>(0);
     const [minutes, setMinutes] = useState<number>(0);
     const [seconds, setSeconds] = useState<number>(0);
 
-  
+
+    const totalSeconds = hours * 3600 + minutes * 60 + seconds;
 
     return (
-        <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>
+        <div className="timeinput" style={{}}>
             {/* Selecionar Horas */}
             <select value={hours} onChange={(e) => setHours(Number(e.target.value))}>
                 {Array.from({ length: 24 }, (_, i) => (
@@ -22,7 +26,6 @@ const TimeInput = () => {
 
             <span>:</span>
 
-            {/* Selecionar Minutos */}
             <select value={minutes} onChange={(e) => setMinutes(Number(e.target.value))}>
                 {Array.from({ length: 60 }, (_, i) => (
                     <option key={i} value={i}>
@@ -33,7 +36,6 @@ const TimeInput = () => {
 
             <span>:</span>
 
-            {/* Selecionar Segundos */}
             <select value={seconds} onChange={(e) => setSeconds(Number(e.target.value))}>
                 {Array.from({ length: 60 }, (_, i) => (
                     <option key={i} value={i}>
@@ -41,6 +43,8 @@ const TimeInput = () => {
                     </option>
                 ))}
             </select>
+            <input type="hidden" name={"horasLiquidas"} value={totalSeconds} />
+
         </div>
     );
 };

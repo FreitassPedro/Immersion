@@ -1,43 +1,45 @@
 import './styles.css';
 import React, { FC, FormEvent, useState } from 'react';
 import { NovoRegistro } from '../CicloTable/cicloItem';
+import TimeInput from './TimeInput';
 
 
 type CicloRegisterProps = {
     isOpen: boolean;
     onClose: () => void;
-    onItemAdd: (novoRegistro: NovoRegistro) => void;
+    updateItemTabela: (novoRegistro: NovoRegistro) => void;
+    itemId: number | null;
 }
 
-export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onItemAdd }) => {
+export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, updateItemTabela ,itemId}) => {
     const padraoDate = new Date();
     const [date, setDate] = useState(padraoDate.toISOString().split('T')[0]);
-    if (!isOpen) {
+    if (!isOpen || itemId === null) {
         return null;
     }
-
-    
-
 
 
     const handleDateChange = (event: FormEvent<HTMLInputElement>) => {
         const dateCollect = new Date(event.currentTarget.value);
         setDate(dateCollect.toISOString().split('T')[0]);
     }
+
+    const handleTimeChange = (hours: number, minutes: number, seconds: number) => {
+        const time = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+        console.log(time);
+    }
+    
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
-        
-
-        
         const form = event.target as HTMLFormElement;
+        
 
         const novoRegistro: NovoRegistro = {
-            id: Math.random(),
+            id: itemId,
             data: form.date.value,
             materia: form.materia.value,
             horasPausa: form.horasPausa.value,
-            horasFeitas: form.horasFeitas.value,
+            horasFeitas: form.horasLiquidas.value,
             tags: form.tags.value,
             exerciciosAcertos: form.exerciciosAcertos.value,
             exerciciosFeitos: form.exerciciosFeitos.value,
@@ -45,16 +47,14 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onItemA
             produtividade: form.produtividade.value
         };
 
-
-        onItemAdd(novoRegistro);
+        console.log(novoRegistro);
+        updateItemTabela(novoRegistro);
         onClose();
     }
 
     return (
         <div className='ciclo-register'>
-
             <div>
-
                 <form onSubmit={handleSubmit}>
                     <h1>Registrar</h1>
                     <span>Insira informações sobre</span>
@@ -68,16 +68,13 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onItemA
                         </label>
                         <label>
                             <div className="input-group">
-                                <span>Liquido</span>
-
-                            <input type="number" placeholder="Digite o valor líquido" name="horasFeitas"/>
-
+                                <span>Liquido (hh:mm:ss)</span>
+                                <TimeInput onChange={handleTimeChange}  />                        
                             </div>
                         </label>
                         <label>
                             <div className="input-group">
-                                <span>Pausa</span>
-
+                                <span>Pausa</span>  
                                 <input type="number" placeholder="Digite o tempo de pausa" name="horasPausa" />
 
                             </div>
@@ -87,9 +84,7 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onItemA
                         <label>
                             <div className="input-group">
                                 <span>Matéria</span>
-
                                 <input type="text" placeholder="Digite a matéria" name="materia"/>
-
                             </div>
                         </label>
                     </div>

@@ -4,17 +4,26 @@ import { CicloRegister } from "../CicloRegister";
 
 import { NovoRegistro } from "./cicloItem";
 
-const timeStringToMinutes = (time: string): number => {
+const timeStringToSeconds = (time: string): number => {
     const [hh, mm, ss] = time.split(":").map(Number);
-    return hh * 60 + mm + ss / 60; // Converte para minutos
+    return hh * 3600 + mm * 60 + ss; // Converte para minutos
 };
+
+const timeSecondsToString = (time: number) => {
+    const hh = Math.floor(time / 3600);
+    const mm = Math.floor((time % 3600) / 60);
+    const ss = time % 60;
+    return `${String(hh).padStart(2, "0")}:${String(mm).padStart(2, "0")}:${String(ss).padStart(2, "0")}`;
+}
 
 export const CicloTable = () => {
 
     const [isCicloRegister, setIsCicloRegister] = useState(false);
     const [dadosTabela, setDadosTabela] = useState(cicloTableItems);
+    const [currentItemId, setCurrentItemId] = useState<number | null>(null);
 
-    const openCicloRegister = () => {
+    const openCicloRegister = (id: number) => {
+        setCurrentItemId(id);
         setIsCicloRegister(true);
     };
 
@@ -23,16 +32,16 @@ export const CicloTable = () => {
     };
 
     const updateItemTabela = (novoRegistro: NovoRegistro) => {
+
         const item = dadosTabela.find((item) => item.id === novoRegistro.id);
-        if (!item) return;
+        if (!item) return console.error("Item não encontrado");
+
+        const horasTotalEmSegundos = timeStringToSeconds(item.horasRealizadas) + parseInt(novoRegistro.horasFeitas);
         
-        const horasRealizadas = timeStringToMinutes(item.horasRealizadas) + timeStringToMinutes(novoRegistro.horasFeitas);
-        const progresso = horasRealizadas / timeStringToMinutes(item.horasMeta);
-       
         const itemAtualizado = {
             ...item,
-            horasRealizadas: horasRealizadas.toString(),
-            progresso: progresso
+            horasRealizadas: timeSecondsToString(horasTotalEmSegundos),
+            progresso: horasTotalEmSegundos / timeStringToSeconds(item.horasMeta)
         };
 
         const novaTabelaAtualizada = [
@@ -40,6 +49,7 @@ export const CicloTable = () => {
             itemAtualizado,
             ...dadosTabela.slice(dadosTabela.indexOf(item) + 1)
         ];
+
         setDadosTabela(novaTabelaAtualizada);
     }
 
@@ -60,7 +70,10 @@ export const CicloTable = () => {
                 <tbody>
                     {dadosTabela.map((item) => (
                         <tr key={item.id}>
-                            <td><button onClick={openCicloRegister}><i className="fa-solid fa-play" /></button> </td>
+                            <td>
+                                <button onClick={() => openCicloRegister(item.id)}>
+                                <i className="fa-solid fa-play" /></button>
+                            </td>
                             <td>{item.materia}</td>
                             <td>{item.horasRealizadas}/{item.horasMeta}</td>
                             <td><progress value={item.progresso} max={1} /></td>
@@ -71,9 +84,10 @@ export const CicloTable = () => {
             </table>
 
             {isCicloRegister && (
-                <CicloRegister isOpen={isCicloRegister} 
-                onClose={closeCicloRegister} 
-                onItemAdd={updateItemTabela}
+                <CicloRegister isOpen={isCicloRegister}
+                    onClose={closeCicloRegister}
+                    updateItemTabela={updateItemTabela}
+                    itemId={currentItemId!}
                 />
             )}
         </div>

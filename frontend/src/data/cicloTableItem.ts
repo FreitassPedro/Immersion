@@ -1,5 +1,5 @@
 interface cicloTableItem {
-    id : number | string,
+    id : number,
     materia: string,
     horasMeta: string,
     horasRealizadas: string,
