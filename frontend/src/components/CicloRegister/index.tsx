@@ -1,6 +1,6 @@
 import './styles.css';
-import React, { FC, FormEvent } from 'react';
-import { NovoRegistro } from '../CicloTable/novoRegistro';
+import React, { FC, FormEvent, useState } from 'react';
+import { NovoRegistro } from '../CicloTable/cicloItem';
 
 
 type CicloRegisterProps = {
@@ -10,22 +10,39 @@ type CicloRegisterProps = {
 }
 
 export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onItemAdd }) => {
+    const padraoDate = new Date();
+    const [date, setDate] = useState(padraoDate.toISOString().split('T')[0]);
     if (!isOpen) {
         return null;
     }
 
+    
+
+
+
+    const handleDateChange = (event: FormEvent<HTMLInputElement>) => {
+        const dateCollect = new Date(event.currentTarget.value);
+        setDate(dateCollect.toISOString().split('T')[0]);
+    }
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-    
+
+        
+
+        
         const form = event.target as HTMLFormElement;
 
         const novoRegistro: NovoRegistro = {
             id: Math.random(),
+            data: form.date.value,
             materia: form.materia.value,
             horasPausa: form.horasPausa.value,
             horasFeitas: form.horasFeitas.value,
-            progresso: 0,
-            tags: form.tags.value
+            tags: form.tags.value,
+            exerciciosAcertos: form.exerciciosAcertos.value,
+            exerciciosFeitos: form.exerciciosFeitos.value,
+            foco: form.foco.value,
+            produtividade: form.produtividade.value
         };
 
 
@@ -46,14 +63,14 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onItemA
                             <div className="input-group">
                                 <span>Data</span>
 
-                                <input type="date" placeholder="Selecione a data" name="date"/>
+                                <input type="date" placeholder="Selecione a data" name="date" value={date} onChange={handleDateChange}/>
                             </div>
                         </label>
                         <label>
                             <div className="input-group">
                                 <span>Liquido</span>
 
-                                <input type="number" placeholder="Digite o valor líquido" name="horasFeitas"/>
+                            <input type="number" placeholder="Digite o valor líquido" name="horasFeitas"/>
 
                             </div>
                         </label>
@@ -80,7 +97,7 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onItemA
                         <label>
                             <div className="input-group">
                                 <span>Método de estudo</span>
-                                <select name="metodo" id="metodo">
+                                <select name="metodo" id="metodo" required>
 
                                     <option value="">Selecione o método</option> {/* Placeholder no select */}
                                     <option value="video">Vídeo</option>
@@ -112,13 +129,13 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onItemA
                         <label>
                             <div className="input-group">
                                 <span>Exercícios feitos</span>
-                                <input type="number" placeholder="Digite o número de exercícios" />
+                                <input type="number" placeholder="Digite o número de exercícios" name="exerciciosFeitos"/>
                             </div>
                         </label>
                         <label>
                             <div className="input-group">
                                 <span>Acertos</span>
-                                <input type="number" placeholder="Digite o número de acertos" />
+                                <input type="number" placeholder="Digite o número de acertos"  name="exerciciosAcertos"/>
                             </div>
                         </label>
                     </div>
@@ -126,13 +143,13 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onItemA
                         <label>
                             <div className="input-group">
                                 <span>Foco</span>
-                                <input type="range" min="1" max="5" step="0.5" /> {/* Range não tem placeholder */}
+                                <input type="range" min="1" max="5" step="0.5" name="foco"/> {/* Range não tem placeholder */}
                             </div>
                         </label>
                         <label>
                             <div className="input-group">
                                 <span>Produtividade</span>
-                                <input type="range" min="1" max="5" step="0.5" /> {/* Range não tem placeholder */}
+                                <input type="range" min="1" max="5" step="0.5" name="produtividade" /> {/* Range não tem placeholder */}
                             </div>
                         </label>
                     </div>

@@ -1,13 +1,18 @@
 import { useState } from "react";
-import { cicloTableData } from "../../data/cicloTableData";
+import { cicloTableItems } from "../../data/cicloTableItem";
 import { CicloRegister } from "../CicloRegister";
 
-import { NovoRegistro } from "./novoRegistro";
+import { NovoRegistro } from "./cicloItem";
+
+const timeStringToMinutes = (time: string): number => {
+    const [hh, mm, ss] = time.split(":").map(Number);
+    return hh * 60 + mm + ss / 60; // Converte para minutos
+};
 
 export const CicloTable = () => {
 
     const [isCicloRegister, setIsCicloRegister] = useState(false);
-    const [dadosTabela, setDadosTabela] = useState(cicloTableData);
+    const [dadosTabela, setDadosTabela] = useState(cicloTableItems);
 
     const openCicloRegister = () => {
         setIsCicloRegister(true);
@@ -17,17 +22,27 @@ export const CicloTable = () => {
         setIsCicloRegister(false);
     };
 
-    const addItemTabela = (novoRegistro: NovoRegistro) => {
-        const itemTabela = {
-            id: novoRegistro.id,
-            materia: novoRegistro.materia,
-            horasFeitas: novoRegistro.horasFeitas,
-            horasMeta: novoRegistro.horasFeitas,
-            progresso: 0,
-            tags: novoRegistro.tags,
-        }
-        setDadosTabela([...dadosTabela, itemTabela]);
-    };
+    const updateItemTabela = (novoRegistro: NovoRegistro) => {
+        const item = dadosTabela.find((item) => item.id === novoRegistro.id);
+        if (!item) return;
+        
+        const horasRealizadas = timeStringToMinutes(item.horasRealizadas) + timeStringToMinutes(novoRegistro.horasFeitas);
+        const progresso = horasRealizadas / timeStringToMinutes(item.horasMeta);
+       
+        const itemAtualizado = {
+            ...item,
+            horasRealizadas: horasRealizadas.toString(),
+            progresso: progresso
+        };
+
+        const novaTabelaAtualizada = [
+            ...dadosTabela.slice(0, dadosTabela.indexOf(item)),
+            itemAtualizado,
+            ...dadosTabela.slice(dadosTabela.indexOf(item) + 1)
+        ];
+        setDadosTabela(novaTabelaAtualizada);
+    }
+
 
     return (
         <div className="table-responsive ciclo-table">
@@ -47,7 +62,7 @@ export const CicloTable = () => {
                         <tr key={item.id}>
                             <td><button onClick={openCicloRegister}><i className="fa-solid fa-play" /></button> </td>
                             <td>{item.materia}</td>
-                            <td>{item.horasFeitas}/{item.horasMeta}</td>
+                            <td>{item.horasRealizadas}/{item.horasMeta}</td>
                             <td><progress value={item.progresso} max={1} /></td>
                             <td>{item.tags}</td>
                         </tr>
@@ -58,7 +73,7 @@ export const CicloTable = () => {
             {isCicloRegister && (
                 <CicloRegister isOpen={isCicloRegister} 
                 onClose={closeCicloRegister} 
-                onItemAdd={addItemTabela}
+                onItemAdd={updateItemTabela}
                 />
             )}
         </div>

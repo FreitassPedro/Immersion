@@ -2,7 +2,7 @@ import { ApexOptions } from "apexcharts";
 
 import Chart from "react-apexcharts";
 
-import { cicloTableData } from "../../data/cicloTableData";
+import { cicloTableItems } from "../../data/cicloTableItem";
 
 const primaryColor = "#a41455";
 const secondaryColor = "#17030c";
@@ -32,9 +32,9 @@ const minutesToTime = (minutes: number): string => {
 }
 
 export const CicloGraph = () => {
-  const labels = cicloTableData.map(item => item.materia);
-  const horasFeitas = cicloTableData.map(item => item.horasFeitas);
-  const horasMeta = cicloTableData.map(item => item.horasMeta);
+  const labels = cicloTableItems.map(item => item.materia);
+  const horasFeitas = cicloTableItems.map(item => item.horasRealizadas);
+  const horasMeta = cicloTableItems.map(item => item.horasMeta);
 
   // Cálculo do 'series' baseado nos dados estáticos
   const series = labels.map((xLabel, index) => ({
