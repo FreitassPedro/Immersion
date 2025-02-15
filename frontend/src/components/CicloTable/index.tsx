@@ -37,7 +37,7 @@ export const CicloTable = () => {
         if (!item) return console.error("Item não encontrado");
 
         const horasTotalEmSegundos = timeStringToSeconds(item.horasRealizadas) + parseInt(novoRegistro.horasFeitas);
-        
+
         const itemAtualizado = {
             ...item,
             horasRealizadas: timeSecondsToString(horasTotalEmSegundos),
@@ -53,6 +53,12 @@ export const CicloTable = () => {
         setDadosTabela(novaTabelaAtualizada);
     }
 
+    const getProgressClass = (progresso: number) => {
+        if (progresso < 0.3) return "pgbar-low";
+        if (progresso < 0.7) return "pgbar-medium";
+        if (progresso < 1) return "pgbar-high";
+        return "pgbar-completed";
+      };
 
     return (
         <div className="table-responsive ciclo-table">
@@ -69,14 +75,16 @@ export const CicloTable = () => {
 
                 <tbody>
                     {dadosTabela.map((item) => (
-                        <tr key={item.id}>
+                        <tr key={item.id} >
                             <td>
                                 <button onClick={() => openCicloRegister(item.id)}>
-                                <i className="fa-solid fa-play" /></button>
+                                    <i className="fa-solid fa-play" /></button>
                             </td>
                             <td>{item.materia}</td>
                             <td>{item.horasRealizadas}/{item.horasMeta}</td>
-                            <td><progress value={item.progresso} max={1} /></td>
+                            <td>
+                                <h5>{item.progresso * 100}%</h5>
+                                <progress value={item.progresso} max={1} className={getProgressClass(item.progresso)} /></td>
                             <td>{item.tags}</td>
                         </tr>
                     ))}
