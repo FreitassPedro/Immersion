@@ -1,6 +1,6 @@
 import './styles.css';
 import React, { FC, FormEvent, useState } from 'react';
-import { NovoRegistro } from '../CicloTable/cicloItem';
+import { NovoRegistro } from './novoRegistro';
 import TimeInput from './TimeInput';
 
 

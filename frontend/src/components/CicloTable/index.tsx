@@ -2,7 +2,7 @@ import { useState } from "react";
 import { cicloTableItems } from "../../data/cicloTableItem";
 import { CicloRegister } from "../CicloRegister";
 
-import { NovoRegistro } from "./cicloItem";
+import { NovoRegistro } from "../CicloRegister/novoRegistro";
 
 const timeStringToSeconds = (time: string): number => {
     const [hh, mm, ss] = time.split(":").map(Number);

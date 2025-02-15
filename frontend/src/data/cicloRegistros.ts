@@ -12,8 +12,8 @@ interface Registro {
     anotacoes: string;
     imagem?: string;
   }
-  
-export const registrosMock: Registro[] = [
+
+export const cicloHistoryItems: Registro[] = [
     {
       id: 1,
       data: "2025-02-10",
