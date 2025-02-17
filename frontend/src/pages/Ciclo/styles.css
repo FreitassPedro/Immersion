@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 :root {
-    --primary-color: #d4c286;
+    --primary-color: #9d86d4;
     --secondary-color: #4b4b4b;
     --tertiary-color: #e7dede;
 }
@@ -166,14 +166,47 @@ hr {
 progress {
     width: 60%;
     height: 1.5rem;
+    border-radius: 0.625rem;
 }
 
 progress::-webkit-progress-bar {
-    background-color: #f3f3f3;
+    background-color: #e2e2e2;
     border-radius: 0.625rem;
 }
 
 progress::-webkit-progress-value {
-    background-color: var(--secondary-color);
     border-radius: 0.625rem;
+}
+
+progress::-moz-progress-bar {
+    border-radius: 0.625rem;
+}
+
+
+.pgbar-low::-moz-progress-bar {
+    background: #d4c286; /* Red */
+}
+.pgbar-low::-webkit-progress-value {
+    background: #d4c286; /* Red */
+}
+
+.pgbar-medium::-moz-progress-bar {
+    background: #b9d486; /* Yellow */
+}
+.pgbar-medium::-webkit-progress-value {
+    background: #b9d486; /* Yellow */
+}
+
+.pgbar-high::-moz-progress-bar {
+    background: #d4ac86; /* Green */
+}
+.pgbar-high::-webkit-progress-value {
+    background: #d4ac86; /* Green */
+}
+
+.pgbar-completed::-moz-progress-bar {
+    background: #55a859; /* Complete */
+}
+.pgbar-completed::-webkit-progress-value {
+    background: #55a859; /* Complete */
 }
