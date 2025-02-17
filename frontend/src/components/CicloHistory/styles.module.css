@@ -1,0 +1,128 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e2e2e2;
+}
+
+.mycontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.dateGroup {
+    width: 70%;
+    justify-items: center;
+}
+
+.dateGroup h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+    border-left: 5px solid;
+    border-bottom: 5px solid;
+    position: relative;
+    width: 100%;
+    height: auto;
+    max-width: 90%;
+}
+
+.cardGroup {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 0.5rem;
+}
+
+.cardTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px 0px 10px;
+    border-radius: 3px 10px 0px 0px;
+    margin-bottom: 0px;
+    background-color: rgb(100, 216, 216);
+}
+
+.cardTitle p,
+h3 {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardContent {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.9rem;
+}
+
+.cardGeneral {
+    width: 60%;
+}
+
+.cardItem {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+.cardItem i {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #464040;
+}
+
+
+
+.card .tags {
+    display: flex;
+    gap: 10px;
+}
+
+.card .tags span {
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border-radius: 15px;
+    font-size: 0.9rem;
+}
+
+.notes {
+    padding: 10px;
+    border-left: 2px dashed #ccc;
+    max-width: 40%;
+}
+
+.notes h4 {
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+.notes p {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.notes img {
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 5px;
+}

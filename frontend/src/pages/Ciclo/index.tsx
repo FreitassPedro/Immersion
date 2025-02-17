@@ -30,7 +30,7 @@ export const Ciclo = () => {
                     <div className="ciclo-stats">
                         <div className="ciclo-graph">
                             <div className="ciclo-graph-box">
-                                <h2>Horas registradas</h2>
+                                <h2>Horas registradas por matéria</h2>
                                 <div className="ciclo-graph-data">
                                     <CicloGraph />
                                 </div>
