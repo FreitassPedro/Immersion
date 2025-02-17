@@ -41,5 +41,18 @@ export const cicloHistoryItems: Registro[] = [
       cor: "#FF5733",
       anotacoes: "Pesquisar mais sobre a Revolução Francesa.",
     },
+    {
+      id: 3,
+      data: "2025-03-10",
+      materia: "Português",
+      horasPausa: "00:20:00",
+      horasFeitas: "02:00:00",
+      metodo: "Leitura e resumos",
+      tags: ["Leitura", "Resumos"],
+      foco: 4.0,
+      produtividade: 4.0,
+      cor: "#28A745",
+      anotacoes: "Revisar a gramática.",
+    }
   ];
   

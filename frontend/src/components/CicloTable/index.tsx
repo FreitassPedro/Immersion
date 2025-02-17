@@ -31,13 +31,13 @@ export const CicloTable = () => {
         setIsCicloRegister(false);
     };
 
-    const updateItemTabela = (novoRegistro: NovoRegistro) => {
+    const handleSaveRegistro = (novoRegistro: NovoRegistro) => {
 
         const item = dadosTabela.find((item) => item.id === novoRegistro.id);
         if (!item) return console.error("Item não encontrado");
 
         const horasTotalEmSegundos = timeStringToSeconds(item.horasRealizadas) + parseInt(novoRegistro.horasFeitas);
-        
+
         const itemAtualizado = {
             ...item,
             horasRealizadas: timeSecondsToString(horasTotalEmSegundos),
@@ -72,7 +72,7 @@ export const CicloTable = () => {
                         <tr key={item.id}>
                             <td>
                                 <button onClick={() => openCicloRegister(item.id)}>
-                                <i className="fa-solid fa-play" /></button>
+                                    <i className="fa-solid fa-play" /></button>
                             </td>
                             <td>{item.materia}</td>
                             <td>{item.horasRealizadas}/{item.horasMeta}</td>
@@ -84,9 +84,10 @@ export const CicloTable = () => {
             </table>
 
             {isCicloRegister && (
-                <CicloRegister isOpen={isCicloRegister}
+                <CicloRegister
+                    isOpen={isCicloRegister}
                     onClose={closeCicloRegister}
-                    updateItemTabela={updateItemTabela}
+                    onSave={handleSaveRegistro}
                     itemId={currentItemId!}
                 />
             )}

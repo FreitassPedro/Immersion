@@ -7,11 +7,11 @@ import TimeInput from './TimeInput';
 type CicloRegisterProps = {
     isOpen: boolean;
     onClose: () => void;
-    updateItemTabela: (novoRegistro: NovoRegistro) => void;
+    onSave: (novoRegistro: NovoRegistro) => void;
     itemId: number | null;
 }
 
-export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, updateItemTabela ,itemId}) => {
+export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onSave, itemId}) => {
     const padraoDate = new Date();
     const [date, setDate] = useState(padraoDate.toISOString().split('T')[0]);
     if (!isOpen || itemId === null) {
@@ -48,7 +48,7 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, updateI
         };
 
         console.log(novoRegistro);
-        updateItemTabela(novoRegistro);
+        onSave(novoRegistro);
         onClose();
     }
 
@@ -149,7 +149,7 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, updateI
                         </label>
                     </div>
                     <div className="form-actions">
-                        <button type="button">Cancel</button>
+                        <button type="button" onClick={onClose}>Cancel</button>
                         <button type="submit">Registrar</button>
                     </div>
                 </form>
