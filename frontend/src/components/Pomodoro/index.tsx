@@ -9,30 +9,15 @@ const META_DEFAULT = 6;
 
 export const Pomodoro = () => {
     const [materiaName, setMateriaName] = useState('MATERIA');
-    const [seconds, setSeconds] = useState(SECONDS_DEFAULT);
+    const [timerSeconds, setTimerSeconds] = useState(SECONDS_DEFAULT);
     const [pauseSeconds, setPauseSeconds] = useState(0);
     const [timer, setTimer] = useState<any>();
+    const [pauseTimer, setPauseTimer] = useState<any>(); // Novo estado para armazenar o ID do intervalo de pausa
+
     const [meta, setMeta] = useState(META_DEFAULT);
 
     const [stage, setStage] = useState('ready');
 
-    const startTimer = () => {
-        setStage('in_progress');
-        const timeInterval = setInterval(() => {
-            setSeconds((previousSeconds) => {
-                if (previousSeconds === META_DEFAULT) {
-                    clearInterval(timeInterval);
-                    setTimer(undefined);
-                    setStage('done');
-                    return 0;
-                }
-
-                return previousSeconds + 1;
-            });
-        }, 1000);
-
-        setTimer(timeInterval);
-    };
 
     // UseMemo executa a função apenas quando o valor de stage é alterado
     const handleStageStatus = useMemo(() => {
@@ -50,6 +35,24 @@ export const Pomodoro = () => {
         }
     }, [stage]);
 
+    const startTimer = () => {
+        setStage('in_progress');
+        clearInterval(pauseTimer);
+        setPauseTimer(undefined);
+        const timeInterval = setInterval(() => {
+            setTimerSeconds((previousSeconds) => {
+                if (previousSeconds === META_DEFAULT) {
+                    setStage('done');
+                }
+
+                return previousSeconds + 1;
+            });
+        }, 1000);
+
+        setTimer(timeInterval);
+    };
+
+
     // useCallback executa a função apenas quando o valor de stage é alterado
     const handlePauseButton = useCallback(() => {
         clearInterval(timer);
@@ -58,22 +61,22 @@ export const Pomodoro = () => {
         handleStartPause();
     }, [timer]);
 
-    const handleStopButton = useCallback(() => {
-        handlePauseButton();
-        setSeconds(SECONDS_DEFAULT);
-        setStage('ready');
-
-    }, [handlePauseButton]);
-
     const handleStartPause = () => {
         const pauseTime = setInterval(() => {
             setPauseSeconds((previousSeconds) => previousSeconds + 1);
 
         }, 1000);
 
-        setPauseSeconds(pauseTime);
+        setPauseTimer(pauseTime);
     };
 
+    const handleStopButton = () => {
+        handlePauseButton();
+    };
+
+    const handleDoneButton = () => {
+            return 0;
+    }
     const secondsToTime = (seconds: number): string => {
         const hours = Math.floor(seconds / 3600);
         const minutes = Math.floor((seconds % 3600) / 60);
@@ -97,7 +100,6 @@ export const Pomodoro = () => {
                 );
             case 'in_progress':
                 return (
-
                     <div className={styles.buttons}>
                         <button onClick={handlePauseButton} className={styles.button}>
                             <i className="fa-solid fa-pause" />
@@ -107,6 +109,17 @@ export const Pomodoro = () => {
                         </button>
                     </div>
                 );
+            case 'done':
+                return (
+                    <div className={styles.buttons}>
+                        <button onClick={handlePauseButton} className={styles.button}>
+                            <i className="fa-solid fa-pause" />
+                        </button>
+                        <button className={styles.button} >
+                            <i className="fa-solid fa-stop" />
+                        </button>
+                    </div>
+                )
             default:
                 return (
                     <div className={styles.buttons}>
@@ -134,7 +147,7 @@ export const Pomodoro = () => {
                 <span className={styles.h1}>{handleStageStatus}</span>
 
                 <div className={styles.timer}>
-                    <h1>{secondsToTime(seconds)}</h1>
+                    <h1>{secondsToTime(timerSeconds)}</h1>
                     <h4>Pause: {secondsToTime(pauseSeconds)}</h4>
                 </div>
 
