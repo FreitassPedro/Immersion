@@ -4,13 +4,15 @@ import { Icon } from "./Icon";
 
 import styles from './styles.module.css';
 
-const SECONDS_DEFAULT = 5;
+const SECONDS_DEFAULT = 0;
+const META_DEFAULT = 6;
 
 export const Pomodoro = () => {
-    const [materiaName, setMateriaName] = useState('');
+    const [materiaName, setMateriaName] = useState('MATERIA');
     const [seconds, setSeconds] = useState(SECONDS_DEFAULT);
     const [pauseSeconds, setPauseSeconds] = useState(0);
     const [timer, setTimer] = useState<any>();
+    const [meta, setMeta] = useState(META_DEFAULT);
 
     const [stage, setStage] = useState('ready');
 
@@ -18,14 +20,14 @@ export const Pomodoro = () => {
         setStage('in_progress');
         const timeInterval = setInterval(() => {
             setSeconds((previousSeconds) => {
-                if (previousSeconds === 0) {
+                if (previousSeconds === META_DEFAULT) {
                     clearInterval(timeInterval);
                     setTimer(undefined);
                     setStage('done');
                     return 0;
                 }
 
-                return previousSeconds - 1;
+                return previousSeconds + 1;
             });
         }, 1000);
 
@@ -42,7 +44,7 @@ export const Pomodoro = () => {
             case 'pause':
                 return 'Pausado';
             case 'done':
-                return 'Concluido';
+                return 'Concluído';
             default:
                 return 'Pronto para iniciar';
         }
@@ -53,6 +55,7 @@ export const Pomodoro = () => {
         clearInterval(timer);
         setTimer(undefined);
         setStage('pause');
+        handleStartPause();
     }, [timer]);
 
     const handleStopButton = useCallback(() => {
@@ -62,6 +65,14 @@ export const Pomodoro = () => {
 
     }, [handlePauseButton]);
 
+    const handleStartPause = () => {
+        const pauseTime = setInterval(() => {
+            setPauseSeconds((previousSeconds) => previousSeconds + 1);
+
+        }, 1000);
+
+        setPauseSeconds(pauseTime);
+    };
 
     const secondsToTime = (seconds: number): string => {
         const hours = Math.floor(seconds / 3600);
@@ -75,7 +86,7 @@ export const Pomodoro = () => {
         switch (stage) {
             case 'pause':
                 return (
-                    <div>
+                    <div className={styles.buttons}>
                         <button onClick={startTimer} className={styles.button}>
                             <Icon variant={"play"} />
                         </button>
@@ -87,7 +98,7 @@ export const Pomodoro = () => {
             case 'in_progress':
                 return (
 
-                    <div>
+                    <div className={styles.buttons}>
                         <button onClick={handlePauseButton} className={styles.button}>
                             <i className="fa-solid fa-pause" />
                         </button>
@@ -98,8 +109,8 @@ export const Pomodoro = () => {
                 );
             default:
                 return (
-                    <div>
-                        <button onClick={startTimer}>
+                    <div className={styles.buttons}>
+                        <button onClick={startTimer} className={styles.button}>
                             <span>Iniciar</span>
                         </button>
                     </div>
@@ -109,15 +120,27 @@ export const Pomodoro = () => {
 
     return (
         <>
-            <div>
-                <h1>Cronômetro</h1>
-                <h2>{handleStageStatus}</h2>
-                <h3>Liquido {secondsToTime(seconds)}</h3>
-                <h4>Tempo pausado: {secondsToTime(pauseSeconds)}</h4>
-                <div style={{ display: "row" }}>
-                    {handleStageButtons}
+            <div className={styles.container}>
+                <h1 className={styles.title}>Sessão {materiaName}</h1>
+                <span>Sua meta de tempo nessa sessão é {secondsToTime(meta)}</span>
+                <div className={styles.modeContainer}>
+                    <h2>Intervalo:</h2>
+                    <div className={styles.modeButtons}>
+                        <button className={styles.button}>No break</button>
+                        <button className={styles.button}>Short break</button>
+                        <button className={styles.button}>Long break</button>
+                    </div>
                 </div>
-            </div>
+                <span className={styles.h1}>{handleStageStatus}</span>
+
+                <div className={styles.timer}>
+                    <h1>{secondsToTime(seconds)}</h1>
+                    <h4>Pause: {secondsToTime(pauseSeconds)}</h4>
+                </div>
+
+                {handleStageButtons}
+
+            </div >
         </>
     )
 };
