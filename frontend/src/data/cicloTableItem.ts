@@ -1,4 +1,4 @@
-interface cicloTableItem {
+export interface CicloTableItem {
     id : number,
     materia: string,
     horasMeta: string,
@@ -6,7 +6,7 @@ interface cicloTableItem {
     progresso: number,
     tags: string,
 }
-export const cicloTableItems: cicloTableItem[] = [
+export const cicloTableItems: CicloTableItem[] = [
     {
         id: 1,
         materia: 'Matemática',

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { cicloTableItems } from "../../data/cicloTableItem";
+import { CicloTableItem } from "../../data/cicloTableItem";
 import { CicloRegister } from "../CicloRegister";
-
+import { CicloStopwatch } from "../CicloStopwatch";
 import { NovoRegistro } from "../CicloRegister/novoRegistro";
 
 const timeStringToSeconds = (time: string): number => {
@@ -18,18 +19,24 @@ const timeSecondsToString = (time: number) => {
 
 export const CicloTable = () => {
 
-    const [isCicloRegister, setIsCicloRegister] = useState(false);
     const [dadosTabela, setDadosTabela] = useState(cicloTableItems);
-    const [currentItemId, setCurrentItemId] = useState<number | null>(null);
+    const [currentItem, setCurrentItem] = useState<CicloTableItem | null>(null);
 
-    const openCicloRegister = (id: number) => {
-        setCurrentItemId(id);
-        setIsCicloRegister(true);
+    const [selectedOption, setSelectedOption] = useState<"manual" | "stopwatch" | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = (id: number) => {
+        const item = dadosTabela.find((item) => item.id === id);
+        setCurrentItem(item!);
+        setIsModalOpen(true);
+        console.log("Modal aberto", id);
     };
 
-    const closeCicloRegister = () => {
-        setIsCicloRegister(false);
-    };
+    const handleRegisterOption = (option: "manual" | "stopwatch") => () => {
+        setSelectedOption(option);
+        setIsModalOpen(false);
+        console.log("Opção selecionada",option);
+    }
 
     const handleSaveRegistro = (novoRegistro: NovoRegistro) => {
 
@@ -58,7 +65,7 @@ export const CicloTable = () => {
         if (progresso < 0.7) return "pgbar-medium";
         if (progresso < 1) return "pgbar-high";
         return "pgbar-completed";
-      };
+    };
 
     return (
         <div className="table-responsive ciclo-table">
@@ -77,13 +84,13 @@ export const CicloTable = () => {
                     {dadosTabela.map((item) => (
                         <tr key={item.id} >
                             <td>
-                                <button onClick={() => openCicloRegister(item.id)}>
+                                <button onClick={() => openModal(item.id)}>
                                     <i className="fa-solid fa-play" /></button>
                             </td>
                             <td>{item.materia}</td>
                             <td>{item.horasRealizadas}/{item.horasMeta}</td>
                             <td>
-                                <h5>{item.progresso * 100}%</h5>
+                                <h5>{(item.progresso * 100).toPrecision(2)}%</h5>
                                 <progress value={item.progresso} max={1} className={getProgressClass(item.progresso)} /></td>
                             <td>{item.tags}</td>
                         </tr>
@@ -91,14 +98,37 @@ export const CicloTable = () => {
                 </tbody>
             </table>
 
-            {isCicloRegister && (
-                <CicloRegister
-                    isOpen={isCicloRegister}
-                    onClose={closeCicloRegister}
-                    onSave={handleSaveRegistro}
-                    itemId={currentItemId!}
-                />
+            {isModalOpen && (
+
+                <div className="ciclo-register">
+                    <h3>Como deseja registrar o tempo?</h3>
+                    <button onClick={handleRegisterOption("manual")}>Manualmente</button>
+                    <button onClick={handleRegisterOption("stopwatch")}>Cronometrar</button>
+                </div>
             )}
+
+            {
+                selectedOption === "manual" && (
+                    <CicloRegister
+                        isOpen={isModalOpen}
+                        onClose={() => setIsModalOpen(false)}
+                        onSave={handleSaveRegistro}
+                        itemId={currentItem!.id}
+                    />
+                )
+            }
+
+            {
+                selectedOption === "stopwatch" && (
+                    <CicloStopwatch
+                        materia={currentItem!.materia}
+                        horasMeta={currentItem!.horasMeta}
+                    />
+                )
+            }
+
+
+            
         </div>
 
     );
