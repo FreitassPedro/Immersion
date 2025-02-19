@@ -3,6 +3,7 @@ import { useCallback, useMemo, useState } from "react";
 import { Icon } from "./Icon";
 
 import styles from './styles.module.css';
+import sound from '../../assets/sounds/big-ben.wav';
 
 const SECONDS_DEFAULT = 0;
 const META_DEFAULT = 6;
@@ -42,6 +43,8 @@ export const Pomodoro = () => {
         const timeInterval = setInterval(() => {
             setTimerSeconds((previousSeconds) => {
                 if (previousSeconds === META_DEFAULT) {
+                    const audio = new Audio(sound);
+                    audio.play();
                     setStage('done');
                 }
 
@@ -75,7 +78,7 @@ export const Pomodoro = () => {
     };
 
     const handleDoneButton = () => {
-            return 0;
+        return 0;
     }
     const secondsToTime = (seconds: number): string => {
         const hours = Math.floor(seconds / 3600);
@@ -135,7 +138,9 @@ export const Pomodoro = () => {
         <>
             <div className={styles.container}>
                 <h1 className={styles.title}>Sessão {materiaName}</h1>
-                <span>Sua meta de tempo nessa sessão é {secondsToTime(meta)}</span>
+                <span>Sua meta de tempo nessa sessão é {secondsToTime(meta)} (HH:MM:SS).
+                    Quando atingir a meta, o sino será tocado. Bons estudos!
+                </span>
                 <div className={styles.modeContainer}>
                     <h2>Intervalo:</h2>
                     <div className={styles.modeButtons}>
