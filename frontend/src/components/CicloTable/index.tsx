@@ -7,7 +7,7 @@ import { NovoRegistro } from "../CicloRegister/novoRegistro";
 
 const timeStringToSeconds = (time: string): number => {
     const [hh, mm, ss] = time.split(":").map(Number);
-    return hh * 3600 + mm * 60 + ss; // Converte para minutos
+    return hh * 3600 + mm * 60 + ss;
 };
 
 const timeSecondsToString = (time: number) => {
@@ -18,11 +18,12 @@ const timeSecondsToString = (time: number) => {
 }
 
 export const CicloTable = () => {
-
     const [dadosTabela, setDadosTabela] = useState(cicloTableItems);
     const [currentItem, setCurrentItem] = useState<CicloTableItem | null>(null);
 
     const [selectedOption, setSelectedOption] = useState<"manual" | "stopwatch" | null>(null);
+    const [stopwatchTime, setStopwatchTime] = useState(0);
+    const [step, setStep] = useState<'select' | 'stopwatch' | 'register'>('select');
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = (id: number) => {
@@ -34,12 +35,12 @@ export const CicloTable = () => {
 
     const handleRegisterOption = (option: "manual" | "stopwatch") => () => {
         setSelectedOption(option);
+        setStep(option === "manual" ? "register" : "stopwatch");
         setIsModalOpen(false);
         console.log("Opção selecionada",option);
     }
 
     const handleSaveRegistro = (novoRegistro: NovoRegistro) => {
-
         const item = dadosTabela.find((item) => item.id === novoRegistro.id);
         if (!item) return console.error("Item não encontrado");
 
@@ -123,6 +124,10 @@ export const CicloTable = () => {
                     <CicloStopwatch
                         materia={currentItem!.materia}
                         horasMeta={currentItem!.horasMeta}
+                        onFinish={(time) =>{
+                            setStopwatchTime(time);
+                            setStep("register");
+                        }}
                     />
                 )
             }

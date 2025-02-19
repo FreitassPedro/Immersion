@@ -5,36 +5,38 @@ import { Icon } from "./Icon";
 import styles from './styles.module.css';
 import sound from '../../assets/sounds/big-ben.wav';
 
-const SECONDS_DEFAULT = 0;
-const META_DEFAULT = 6;
-
 interface CicloStopwatchProps {
     materia: string;
     horasMeta: string;
+    onFinish: (tempo: number) => void;
 }
-const secondsToTime = (seconds: number): string => {
+
+const timeSecondsToString = (seconds: number): string => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secondsLast = seconds % 60;
-
     return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secondsLast).padStart(2, '0')}`;
 };
-export const CicloStopwatch: React.FC<CicloStopwatchProps> = ({materia, horasMeta}) => {    
-    const [timerSeconds, setTimerSeconds] = useState(SECONDS_DEFAULT);
-    const [pauseSeconds, setPauseSeconds] = useState(0);
-    const [timer, setTimer] = useState<any>();
-    const [pauseTimer, setPauseTimer] = useState<any>(); // Novo estado para armazenar o ID do intervalo de pausa
-    
-    
 
+const timeStringToSeconds = (time: string): number => {
+    const [hh, mm, ss] = time.split(":").map(Number);
+    return hh * 3600 + mm * 60 + ss; // Converte para minutos
+};
+
+export const CicloStopwatch: React.FC<CicloStopwatchProps> = ({ materia, horasMeta, onFinish }) => {
+    const [timerSeconds, setTimerSeconds] = useState<number>(0);
+    const [pauseSeconds, setPauseSeconds] = useState<number>(0);
+    const [timer, setTimer] = useState<any>();
+    const [pauseTimer, setPauseTimer] = useState<any>(); // estado para armazenar o ID do intervalo de pausa
     const [stage, setStage] = useState('ready');
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // UseMemo executa a função apenas quando o valor de stage é alterado
     const handleStageStatus = useMemo(() => {
         switch (stage) {
             case 'in_progress':
-                return 'Foco total!';
+                return 'Foco total! 🔥';
             case 'break':
                 return 'Intervalo';
             case 'pause':
@@ -52,7 +54,7 @@ export const CicloStopwatch: React.FC<CicloStopwatchProps> = ({materia, horasMet
         setPauseTimer(undefined);
         const timeInterval = setInterval(() => {
             setTimerSeconds((previousSeconds) => {
-                if (previousSeconds === META_DEFAULT) {
+                if (previousSeconds === timeStringToSeconds(horasMeta)) {
                     const audio = new Audio(sound);
                     audio.play();
                     setStage('done');
@@ -84,13 +86,18 @@ export const CicloStopwatch: React.FC<CicloStopwatchProps> = ({materia, horasMet
     };
 
     const handleStopButton = () => {
-        handlePauseButton();
+        clearInterval(timer);
+        clearInterval(pauseTimer);
+        setTimer(undefined);
+        setPauseTimer(undefined);
+        setIsModalOpen(true);
+        onFinish(timerSeconds);
     };
 
     const handleDoneButton = () => {
         return 0;
     }
-    
+
 
     const handleStageButtons = useMemo(() => {
         switch (stage) {
@@ -100,7 +107,7 @@ export const CicloStopwatch: React.FC<CicloStopwatchProps> = ({materia, horasMet
                         <button onClick={startTimer} className={styles.button}>
                             <Icon variant={"play"} />
                         </button>
-                        <button className={styles.button}>
+                        <button onClick={handleStopButton} className={styles.button}>
                             <i className="fa-solid fa-flag-checkered" />
                         </button>
                     </div>
@@ -111,7 +118,7 @@ export const CicloStopwatch: React.FC<CicloStopwatchProps> = ({materia, horasMet
                         <button onClick={handlePauseButton} className={styles.button}>
                             <i className="fa-solid fa-pause" />
                         </button>
-                        <button className={styles.button} >
+                        <button onClick={handleStopButton} className={styles.button} >
                             <i className="fa-solid fa-stop" />
                         </button>
                     </div>
@@ -122,7 +129,7 @@ export const CicloStopwatch: React.FC<CicloStopwatchProps> = ({materia, horasMet
                         <button onClick={handlePauseButton} className={styles.button}>
                             <i className="fa-solid fa-pause" />
                         </button>
-                        <button className={styles.button} >
+                        <button onClick={handleStopButton} className={styles.button} >
                             <i className="fa-solid fa-stop" />
                         </button>
                     </div>
@@ -137,6 +144,20 @@ export const CicloStopwatch: React.FC<CicloStopwatchProps> = ({materia, horasMet
                 );
         };
     }, [handlePauseButton, stage]);
+
+    const handleClose = () => {
+        setStage('pause');
+        setIsModalOpen(false);
+    }
+
+    const handleModalMessage = () => {
+        if (timerSeconds >= timeStringToSeconds(horasMeta)) {
+            return <p>Parabéns! Você atingiu a meta de tempo. Descanse um pouco e hidrate-se.</p>
+        } else {
+            return <p>Não pare agora, ainda resta {timeSecondsToString(timeStringToSeconds(horasMeta) - timerSeconds)}, falta pouco!</p>
+        }
+    
+     };
 
     return (
         <>
@@ -158,14 +179,28 @@ export const CicloStopwatch: React.FC<CicloStopwatchProps> = ({materia, horasMet
                         <span className={styles.h1}>{handleStageStatus}</span>
 
                         <div className={styles.timer}>
-                            <h1>{secondsToTime(timerSeconds)}</h1>
-                            <h4>Pause: {secondsToTime(pauseSeconds)}</h4>
+                            <h1>{timeSecondsToString(timerSeconds)}</h1>
+                            <h4>Pause: {timeSecondsToString(pauseSeconds)}</h4>
                         </div>
 
                         {handleStageButtons}
                     </div>
                 </div>
             </div >
+
+            {
+                isModalOpen && (
+                    <div style={{ display: 'flex', flexDirection: 'column',alignItems: 'center', zIndex: 1000, position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'white', padding: '20px', borderRadius: '10px' }}>
+                        <h3>Deseja parar?</h3>
+                        <p>Até o momento, você estudou por {timeSecondsToString(timerSeconds)}.</p>
+                        {handleModalMessage()}
+                        <div style={{ display: 'flex', gap: '10px' }}>
+                            <button >Sim</button>
+                            <button onClick={handleClose}>Não</button>
+                        </div>
+                    </div>
+                )
+            }
         </>
     )
 };
