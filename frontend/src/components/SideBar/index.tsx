@@ -27,6 +27,12 @@ export const SideBar = () => {
                         <span>Ciclo</span>
                     </a>
                 </li>
+                <li className="nav-item">
+                    <a href="#">
+                    <i className="fa-light fa-clipboard"></i>
+                        <span>Registros</span>
+                    </a>
+                </li>
 
                 <li className="nav-item">
                     <a href="#">
