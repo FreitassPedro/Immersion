@@ -91,11 +91,11 @@ export const CicloStopwatch: React.FC<CicloStopwatchProps> = ({ materia, horasMe
         setTimer(undefined);
         setPauseTimer(undefined);
         setIsModalOpen(true);
-        onFinish(timerSeconds);
     };
 
-    const handleDoneButton = () => {
-        return 0;
+    const handleDone = () => {
+        setIsModalOpen(false);
+        onFinish(timerSeconds);
     }
 
 
@@ -190,12 +190,12 @@ export const CicloStopwatch: React.FC<CicloStopwatchProps> = ({ materia, horasMe
 
             {
                 isModalOpen && (
-                    <div style={{ display: 'flex', flexDirection: 'column',alignItems: 'center', zIndex: 1000, position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'white', padding: '20px', borderRadius: '10px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 1000, position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'white', padding: '20px', borderRadius: '10px' }}>
                         <h3>Deseja parar?</h3>
                         <p>Até o momento, você estudou por {timeSecondsToString(timerSeconds)}.</p>
                         {handleModalMessage()}
                         <div style={{ display: 'flex', gap: '10px' }}>
-                            <button >Sim</button>
+                            <button onClick={handleDone} >Sim</button>
                             <button onClick={handleClose}>Não</button>
                         </div>
                     </div>
