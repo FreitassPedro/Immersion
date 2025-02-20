@@ -1,17 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const TimeInput = ({onChange}:
-    {
-        onChange: (hours: number, minutes: number, seconds: number) => void;
-    }
-) => {
+const TimeInput = ({ initialTime }:
+    { initialTime: number }) => {
 
     const [hours, setHours] = useState<number>(0);
     const [minutes, setMinutes] = useState<number>(0);
     const [seconds, setSeconds] = useState<number>(0);
 
+    const [time, setTime] = useState<string>();
 
-    const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+    const handleTime = useEffect(() => {
+        if (initialTime > 0) {
+            const h = Math.floor(initialTime / 3600);
+            const m = Math.floor((initialTime % 3600) / 60);
+            const s = initialTime % 60;
+            
+            setHours(h);
+            setMinutes(m);
+            setSeconds(s);
+        }
+        setTime(`${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`);
+    }, [hours, minutes, seconds]);
 
     return (
         <div className="timeinput" style={{}}>
@@ -43,8 +52,7 @@ const TimeInput = ({onChange}:
                     </option>
                 ))}
             </select>
-            <input type="hidden" name={"horasLiquidas"} value={totalSeconds} />
-
+            <input type="hidden" name={"horasLiquidas"} value={time} />
         </div>
     );
 };

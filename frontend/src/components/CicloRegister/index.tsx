@@ -9,31 +9,25 @@ type CicloRegisterProps = {
     onClose: () => void;
     onSave: (novoRegistro: NovoRegistro) => void;
     itemId: number | null;
+    secondsDone: number;
 }
 
-export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onSave, itemId}) => {
+export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onSave, itemId, secondsDone}) => {
     const padraoDate = new Date();
     const [date, setDate] = useState(padraoDate.toISOString().split('T')[0]);
     if (!isOpen || itemId === null) {
         return null;
     }
 
-
     const handleDateChange = (event: FormEvent<HTMLInputElement>) => {
         const dateCollect = new Date(event.currentTarget.value);
         setDate(dateCollect.toISOString().split('T')[0]);
-    }
-
-    const handleTimeChange = (hours: number, minutes: number, seconds: number) => {
-        const time = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-        console.log(time);
     }
     
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const form = event.target as HTMLFormElement;
         
-
         const novoRegistro: NovoRegistro = {
             id: itemId,
             data: form.date.value,
@@ -69,7 +63,7 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onSave,
                         <label>
                             <div className="input-group">
                                 <span>Liquido (hh:mm:ss)</span>
-                                <TimeInput onChange={handleTimeChange}  />                        
+                                <TimeInput initialTime={secondsDone}  />                        
                             </div>
                         </label>
                         <label>
