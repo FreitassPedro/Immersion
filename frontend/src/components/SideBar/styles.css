@@ -1,7 +1,7 @@
 :root {
-    --primary-color: #d4c286;
-    --secondary-color: #4b4b4b;
-    --tertiary-color: #e7dede;
+    --primary-color: #892447;
+    --secondary-color: #dfdddd;
+    --tertiary-color: #d4cfcf;
 }
 
 body {
@@ -16,7 +16,7 @@ body {
     position: fixed;
     left: 0;
     top: 0;
-    background: var(--tertiary-color);
+    background: var(--secondary-color);
     transition: width 0.3s ease-in-out;
 }
 
@@ -84,7 +84,7 @@ hr {
     position: absolute;
     bottom: 0;
     width: 100%;
-    background-color: var(--primary-color);
+    background-color: #892447;
     border-radius: 1rem 1rem 0 0;
     height: 4rem;
     display: flex;

@@ -10,6 +10,7 @@ const CicloHistory = () => {
                     <div className={styles.card}>
                         <div className={styles.cardTitle}>
                             <h3><i className="fas fa-book"></i>Matemática</h3>
+                            <span>10:54 ➔ 12:00</span>
                             <strong><i className="fas fa-lightbulb" /> Método: Resolução de exercícios</strong>
                         </div>
                         <div className={styles.cardContent}>
@@ -33,6 +34,7 @@ const CicloHistory = () => {
                         <div className={styles.cardTitle}>
                             <h3><i className="fas fa-book"></i>Inglês</h3>
                             <strong><i className="fas fa-lightbulb" /> Método: Simulado</strong>
+                            <span>10:54 ➔ 12:00</span>
                         </div>
                         <div className={styles.cardContent}>
                             <div className={styles.cardGeneral}>
