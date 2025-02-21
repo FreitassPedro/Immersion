@@ -1,5 +1,5 @@
 import './styles.css';
-import React, { FC, FormEvent, useState } from 'react';
+import { FC, FormEvent, useState } from 'react';
 import { NovoRegistro } from './novoRegistro';
 import TimeInput from './TimeInput';
 
@@ -12,7 +12,7 @@ type CicloRegisterProps = {
     secondsDone: number;
 }
 
-export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onSave, itemId, secondsDone}) => {
+export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onSave, itemId, secondsDone }) => {
     const padraoDate = new Date();
     const [date, setDate] = useState(padraoDate.toISOString().split('T')[0]);
     if (!isOpen || itemId === null) {
@@ -23,14 +23,16 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onSave,
         const dateCollect = new Date(event.currentTarget.value);
         setDate(dateCollect.toISOString().split('T')[0]);
     }
-    
+
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const form = event.target as HTMLFormElement;
-        
+
         const novoRegistro: NovoRegistro = {
             id: itemId,
             data: form.date.value,
+            inicio: Date.now(),
+            fim: "12:59",
             materia: form.materia.value,
             horasPausa: form.horasPausa.value,
             horasFeitas: form.horasLiquidas.value,
@@ -38,7 +40,8 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onSave,
             exerciciosAcertos: form.exerciciosAcertos.value,
             exerciciosFeitos: form.exerciciosFeitos.value,
             foco: form.foco.value,
-            produtividade: form.produtividade.value
+            produtividade: form.produtividade.value,
+            anotacoes: "Anotações"
         };
 
         console.log(novoRegistro);
@@ -56,19 +59,18 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onSave,
                         <label>
                             <div className="input-group">
                                 <span>Data</span>
-
-                                <input type="date" placeholder="Selecione a data" name="date" value={date} onChange={handleDateChange}/>
+                                <input type="date" placeholder="Selecione a data" name="date" value={date} onChange={handleDateChange} />
                             </div>
                         </label>
                         <label>
                             <div className="input-group">
                                 <span>Liquido (hh:mm:ss)</span>
-                                <TimeInput initialTime={secondsDone}  />                        
+                                <TimeInput initialTime={secondsDone} />
                             </div>
                         </label>
                         <label>
                             <div className="input-group">
-                                <span>Pausa</span>  
+                                <span>Pausa</span>
                                 <input type="number" placeholder="Digite o tempo de pausa" name="horasPausa" />
 
                             </div>
@@ -78,7 +80,7 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onSave,
                         <label>
                             <div className="input-group">
                                 <span>Matéria</span>
-                                <input type="text" placeholder="Digite a matéria" name="materia"/>
+                                <input type="text" placeholder="Digite a matéria" name="materia" />
                             </div>
                         </label>
                     </div>
@@ -118,13 +120,13 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onSave,
                         <label>
                             <div className="input-group">
                                 <span>Exercícios feitos</span>
-                                <input type="number" placeholder="Digite o número de exercícios" name="exerciciosFeitos"/>
+                                <input type="number" placeholder="Digite o número de exercícios" name="exerciciosFeitos" />
                             </div>
                         </label>
                         <label>
                             <div className="input-group">
                                 <span>Acertos</span>
-                                <input type="number" placeholder="Digite o número de acertos"  name="exerciciosAcertos"/>
+                                <input type="number" placeholder="Digite o número de acertos" name="exerciciosAcertos" />
                             </div>
                         </label>
                     </div>
@@ -132,7 +134,7 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onSave,
                         <label>
                             <div className="input-group">
                                 <span>Foco</span>
-                                <input type="range" min="1" max="5" step="0.5" name="foco"/> {/* Range não tem placeholder */}
+                                <input type="range" min="1" max="5" step="0.5" name="foco" /> {/* Range não tem placeholder */}
                             </div>
                         </label>
                         <label>
@@ -142,10 +144,19 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onSave,
                             </div>
                         </label>
                     </div>
+                    <div className='form-group'>
+                        <label>
+                            <div className="input-group">
+                                <span>Anotações</span>
+                                <textarea placeholder="Digite suas anotações" name="anotacoes"></textarea>
+                            </div>
+                        </label>
+                    </div>
                     <div className="form-actions">
                         <button type="button" onClick={onClose}>Cancel</button>
                         <button type="submit">Registrar</button>
                     </div>
+
                 </form>
             </div>
         </div>

@@ -5,7 +5,6 @@ import { Ciclo } from '../pages/Ciclo';
 import { SideBar } from '../components/SideBar';
 import CicloHistory from '../components/CicloHistory';
 
-
 export const AppRoutes = () => {
 
     return (

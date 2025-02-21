@@ -2,6 +2,8 @@ interface Registro {
     id: number;
     data: string;
     materia: string;
+    dataInicio: string,
+    dataFim: string,
     horasPausa: string;
     horasFeitas: string;
     metodo: string;
@@ -18,6 +20,8 @@ export const cicloHistoryItems: Registro[] = [
       id: 1,
       data: "2025-02-10",
       materia: "Matemática",
+      dataInicio: "08:00",
+      dataFim: "10:15",
       horasPausa: "00:30:00",
       horasFeitas: "02:15:30",
       metodo: "Resolução de exercícios",
@@ -32,6 +36,8 @@ export const cicloHistoryItems: Registro[] = [
       id: 2,
       data: "2025-02-10",
       materia: "História",
+      dataInicio: "14:00",
+      dataFim: "15:45",
       horasPausa: "00:25:00",
       horasFeitas: "01:45:00",
       metodo: "Leitura e resumos",
@@ -45,6 +51,8 @@ export const cicloHistoryItems: Registro[] = [
       id: 3,
       data: "2025-03-10",
       materia: "Português",
+      dataInicio: "09:00",
+      dataFim: "11:00",
       horasPausa: "00:20:00",
       horasFeitas: "02:00:00",
       metodo: "Leitura e resumos",

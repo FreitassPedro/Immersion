@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+
 const TimeInput = ({ initialTime }:
     { initialTime: number }) => {
 
@@ -9,12 +10,12 @@ const TimeInput = ({ initialTime }:
 
     const [time, setTime] = useState<string>();
 
-    const handleTime = useEffect(() => {
+    useEffect(() => {
         if (initialTime > 0) {
             const h = Math.floor(initialTime / 3600);
             const m = Math.floor((initialTime % 3600) / 60);
             const s = initialTime % 60;
-            
+
             setHours(h);
             setMinutes(m);
             setSeconds(s);
