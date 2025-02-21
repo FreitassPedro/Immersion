@@ -1,6 +1,8 @@
 export type NovoRegistro = {
     id: number,
     data: string,
+    inicio: Date,
+    fim: Date,
     materia: string,
     horasPausa: string,
     horasFeitas: string,
@@ -8,5 +10,7 @@ export type NovoRegistro = {
     exerciciosFeitos: number,
     exerciciosAcertos: number
     foco: number,
-    produtividade: number
+    produtividade: number,
+    anotacoes: string
 }
+
