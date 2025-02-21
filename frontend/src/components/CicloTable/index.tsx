@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { cicloTableItems } from "../../data/cicloTableItem";
 import { CicloTableItem } from "../../data/cicloTableItem";
 import { CicloRegister } from "../CicloRegister";
@@ -21,7 +21,6 @@ export const CicloTable = () => {
     const [dadosTabela, setDadosTabela] = useState(cicloTableItems);
     const [currentItem, setCurrentItem] = useState<CicloTableItem | null>(null);
 
-    const [selectedOption, setSelectedOption] = useState<"manual" | "stopwatch" | null>(null);
     const [stopwatchTime, setStopwatchTime] = useState<number>(0);
     const [step, setStep] = useState<'select' | 'stopwatch' | 'register' | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,32 +34,32 @@ export const CicloTable = () => {
         console.log("Modal aberto", id);
     };
 
-    const handleRegisterOption = (option: "manual" | "stopwatch") => () => {
-        setSelectedOption(option);
-        setStep(option === 'manual' ? 'register' : 'stopwatch');
-        setIsModalOpen(false);
-    }
+    // callBack foi usado pois nao ha necessidade de recriar a funcao a cada renderizacao se ela nao mudar
+    const handleRegisterOption = useCallback(
+        (option: "manual" | "stopwatch") => () => {
+            setStep(option === 'manual' ? 'register' : 'stopwatch');
+            setIsModalOpen(false);
+        }
+        , []
+    );
 
-    const handleSaveRegistro = (novoRegistro: NovoRegistro) => {
-        const item = dadosTabela.find((item) => item.id === novoRegistro.id);
-        if (!item) return console.error("Item não encontrado");
-
-        const horasTotalEmSegundos = timeStringToSeconds(item.horasRealizadas) + parseInt(novoRegistro.horasFeitas);
-
-        const itemAtualizado = {
-            ...item,
-            horasRealizadas: timeSecondsToString(horasTotalEmSegundos),
-            progresso: horasTotalEmSegundos / timeStringToSeconds(item.horasMeta)
-        };
-
-        const novaTabelaAtualizada = [
-            ...dadosTabela.slice(0, dadosTabela.indexOf(item)),
-            itemAtualizado,
-            ...dadosTabela.slice(dadosTabela.indexOf(item) + 1)
-        ];
-
-        setDadosTabela(novaTabelaAtualizada);
-    }
+    const handleSaveRegistro = useCallback((novoRegistro: NovoRegistro) => {
+        setDadosTabela((prevDados) =>
+            prevDados.map((item) =>
+                item.id === novoRegistro.id
+                    ? {
+                        ...item,
+                        horasRealizadas: timeSecondsToString(
+                            timeStringToSeconds(item.horasRealizadas) + parseInt(novoRegistro.horasFeitas)
+                        ),
+                        progresso:
+                            (timeStringToSeconds(item.horasRealizadas) + parseInt(novoRegistro.horasFeitas)) /
+                            timeStringToSeconds(item.horasMeta),
+                    }
+                    : item
+            )
+        );
+    }, []);
 
     useEffect(() => {
         switch (step) {

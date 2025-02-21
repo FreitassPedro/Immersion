@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 :root {
-    --primary-color: #9d86d4;
-    --secondary-color: #4b4b4b;
+    --primary-color: #892447;
+    --secondary-color: #d3c0c0;
     --tertiary-color: #e7dede;
+    --background-default: #eadfdd;
 }
 .container {
     display: flex;
@@ -11,7 +12,6 @@
     width: calc(100% - 16rem);
     margin-left: 16rem;
     min-width: 100vh;
-
 }
 
 hr {
@@ -21,7 +21,7 @@ hr {
 }
 
 .ciclo-title {
-    background-color: #fff;
+    background-color: var(--primary-color);
     border-radius: 6px;
     width: 100%;
     height: 2.5rem;
@@ -34,8 +34,9 @@ hr {
 }
 
 .ciclo-title h1 {
-    font-size: 1.25rem;
-    color: #676c79;
+    font-size: 1.2rem;
+    color: #f1f1f1;
+    font-weight: bold;
 }
 
 .ciclo-stats {
@@ -47,7 +48,7 @@ hr {
 }
 
 .ciclo-graph {
-    background-color: #fff;
+    background-color: var(--secondary-color);
     border-radius: 8px;
     min-width: 50%;
     width: 70%;
@@ -58,7 +59,7 @@ hr {
 .ciclo-graph h2 {
     text-align: center;
     font-size: 1.25rem;
-    color: #676c79;
+    color: #333333;
 }
 
 .ciclo-graph-box {
@@ -80,8 +81,9 @@ hr {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 20rem;
-    /* Define um limite */
-
+    background-color: var(--secondary-color);
+    border: none;
+    
     .card-body {
         display: flex;
         flex-direction: column;
@@ -94,7 +96,7 @@ hr {
         justify-content: space-between;
         align-items: center;
         font-size: 0.75rem;
-        color: var(--secondary-color);
+        color: #313131;
 
         i {
             font-size: 1rem;
@@ -137,7 +139,7 @@ hr {
 .table thead th {
     background-color: var(--primary-color);
     font-size: 0.9rem;
-    color: var(--secondary-color);
+    color: #d3d3d3;
     font-weight: 400;
     text-align: center;
     padding: 0.6rem
@@ -147,7 +149,7 @@ hr {
 .table tbody td {
     height: 3.1rem;
     font-size: 16px;
-    color: #454546;
+    color: rgb(31, 24, 24);
     font-weight: 300;
     text-align: center;
     vertical-align: middle;
@@ -155,11 +157,11 @@ hr {
 }
 
 .table tbody tr:nth-child(odd) td {
-    background-color: #f7f7f7; /* Cor X */
+    background-color: var(--tertiary-color) /* Cor X */
 }
 
 .table tbody tr:nth-child(even) td{
-    background-color: #e6e6e6; /* Cor Y */
+    background-color: var(--secondary-color); /* Cor Y */
 }
 
 
@@ -170,7 +172,7 @@ progress {
 }
 
 progress::-webkit-progress-bar {
-    background-color: #e2e2e2;
+    background-color: rgba(170, 170, 170, 0.1);
     border-radius: 0.625rem;
 }
 
@@ -184,29 +186,29 @@ progress::-moz-progress-bar {
 
 
 .pgbar-low::-moz-progress-bar {
-    background: #d4c286; /* Red */
+    background: var(--primary-color);
 }
 .pgbar-low::-webkit-progress-value {
-    background: #d4c286; /* Red */
+    background: var(--primary-color);
 }
 
 .pgbar-medium::-moz-progress-bar {
-    background: #b9d486; /* Yellow */
+    background: var(--primary-color);
 }
 .pgbar-medium::-webkit-progress-value {
-    background: #b9d486; /* Yellow */
+    background: var(--primary-color);
 }
 
 .pgbar-high::-moz-progress-bar {
-    background: #d4ac86; /* Green */
+    background: var(--primary-color);
 }
 .pgbar-high::-webkit-progress-value {
-    background: #d4ac86; /* Green */
+    background: var(--primary-color);
 }
 
 .pgbar-completed::-moz-progress-bar {
-    background: #55a859; /* Complete */
+    background: var(--primary-color);
 }
 .pgbar-completed::-webkit-progress-value {
-    background: #55a859; /* Complete */
+    background: var(--primary-color);
 }

@@ -3,23 +3,10 @@ import { ApexOptions } from "apexcharts";
 import Chart from "react-apexcharts";
 
 import { cicloTableItems } from "../../data/cicloTableItem";
+import { useEffect, useMemo, useState } from "react";
 
 const primaryColor = "#a41455";
 const secondaryColor = "#17030c";
-
-type ChartData = {
-  labels: string[];
-  series: {
-    x: string;
-    y: number;
-    goals: {
-      value: number;
-      strokeColor: string
-    }[];
-  }[];
-};
-
-
 
 const timeToMinutes = (time: string): number => {
   const [hh, mm, ss] = time.split(":").map(Number);
@@ -32,22 +19,32 @@ const minutesToTime = (minutes: number): string => {
 }
 
 export const CicloGraph = () => {
-  const labels = cicloTableItems.map(item => item.materia);
-  const horasFeitas = cicloTableItems.map(item => item.horasRealizadas);
-  const horasMeta = cicloTableItems.map(item => item.horasMeta);
+  const [dadosTabela, setDadosTabela] = useState(cicloTableItems);
+
+  useEffect(() => {
+    setDadosTabela(cicloTableItems);
+  }, []);
+
+  const labels = useMemo(() => dadosTabela.map(item => item.materia), [dadosTabela]);
+  const horasFeitas = useMemo(() => dadosTabela.map(item => item.horasRealizadas), [dadosTabela]);
+  const horasMeta = useMemo(() => dadosTabela.map(item => item.horasMeta), [dadosTabela]);
 
   // Cálculo do 'series' baseado nos dados estáticos
-  const series = labels.map((xLabel, index) => ({
-    x: xLabel,
-    y: timeToMinutes(horasFeitas[index]),
-    goals: [{ name: "Meta", value: timeToMinutes(horasMeta[index]), strokeColor: secondaryColor }],
-  }));
+  const series = useMemo(() => {
+    return labels.map((xLabel, index) => ({
+      x: xLabel,
+      y: timeToMinutes(horasFeitas[index]),
+      goals: [{ name: "Meta", value: timeToMinutes(horasMeta[index]), strokeColor: secondaryColor }],
+    }));
+  }, [labels, horasFeitas, horasMeta]);
 
   const options: ApexOptions = {
     chart: {
       type: 'bar',
     },
-
+    grid: {
+      borderColor: "#C0C0C0",
+    },
     legend: {
       fontFamily: "Inter, sans-serif",
     },
@@ -85,9 +82,7 @@ export const CicloGraph = () => {
         },
         formatter: (value) => minutesToTime(value as number),
       },
-
     },
-
 
   };
 

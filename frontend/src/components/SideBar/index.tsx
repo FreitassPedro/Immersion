@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './styles.css';
 
 
@@ -16,34 +17,34 @@ export const SideBar = () => {
             <div className="nav-content">
                 <li className="nav-item">
                     <a href="#">
-                    <i className="fa-light fa-house"></i>
+                        <i className="fa-light fa-house"></i>
                         <span>Home</span>
                     </a>
                 </li>
 
                 <li className="nav-item">
-                    <a href="#">
-                    <i className="fa-light fa-clipboard"></i>
+                    <Link to="/ciclo">
+                        <i className="fa-light fa-clipboard"></i>
                         <span>Ciclo</span>
-                    </a>
+                    </Link>
                 </li>
                 <li className="nav-item">
-                    <a href="#">
-                    <i className="fa-light fa-clipboard"></i>
+                    <Link to="/registro">
+                        <i className="fa-light fa-clock-rotate-left" />
                         <span>Registros</span>
-                    </a>
+                    </Link>
                 </li>
 
                 <li className="nav-item">
                     <a href="#">
-                    <i className="fa-light fa-chart-line"></i>
+                        <i className="fa-light fa-chart-line"></i>
                         <span>Desempenho</span>
                     </a>
                 </li>
 
                 <li className="nav-item">
                     <a href="#">
-                    <i className="fa-light fa-gear"></i>
+                        <i className="fa-light fa-gear"></i>
                         <span>Configurações</span>
                     </a>
                 </li>
