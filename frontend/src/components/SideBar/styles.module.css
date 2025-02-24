@@ -20,7 +20,7 @@ body {
     transition: width 0.3s ease-in-out;
 }
 
-.nav-header {
+.navHeader {
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -29,7 +29,7 @@ body {
 
 }
 
-.nav-header h1 {
+.navHeader h1 {
     font-family: 'Courier New', Courier, monospace;
     font-size: 1.8rem;
 }
@@ -40,13 +40,13 @@ hr {
     margin: 10px auto 10px auto;
     
 }
-.nav-content {
+.navContent {
     gap: 1.2rem;
     display: flex;
     flex-direction: column;
 }
 
-.nav-item {
+.navItem {
     display: flex;
     align-items: center;
     /* Centraliza verticalmente os itens dentro da nav-item */
@@ -54,7 +54,7 @@ hr {
     font-size: 1rem;
 }
 
-.nav-item a {
+.navItem a {
     display: flex;
     align-items: center; /* Centraliza verticalmente os itens dentro do link */
     text-decoration: none;
@@ -63,7 +63,7 @@ hr {
     letter-spacing: -1px;
 }
 
-.nav-item i {
+.navItem i {
     font-size: 1rem;
     width: 32px;
     height: 32px;
@@ -73,14 +73,14 @@ hr {
     justify-content: center;
 }
 
-.nav-item span {
+.navItem span {
     text-decoration: none;
     color: rgb(31, 31, 31);
 }
 
 
 
-.nav-footer {
+.navFooter {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -92,20 +92,20 @@ hr {
 
 }
 
-.nav-footer-head {
+.navFooterHead {
     width: 90%;
     display: flex;
     align-items: center;
 }
 
-.nav-footer-avatar img {
+.navFooterAvatar img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
 
 }
 
-.nav-footer-user {
+.navFooterUser {
     width: 95%;
     padding-left: 5px;
 

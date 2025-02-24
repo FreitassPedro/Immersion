@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import styles from "./styles.module.css";
 
 const TimeInput = ({ initialTime }:
     { initialTime: number }) => {
@@ -24,7 +24,7 @@ const TimeInput = ({ initialTime }:
     }, [hours, minutes, seconds]);
 
     return (
-        <div className="timeinput" style={{}}>
+        <div className={styles.timeinput} style={{}}>
             {/* Selecionar Horas */}
             <select value={hours} onChange={(e) => setHours(Number(e.target.value))}>
                 {Array.from({ length: 24 }, (_, i) => (

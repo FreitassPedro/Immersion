@@ -1,4 +1,4 @@
-.ciclo-register {
+.cicloRegister {
     position: fixed;
     top: 0;
     left: 0;
@@ -7,16 +7,24 @@
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
-
     align-items: center;
     z-index: 1000; /* Garante que o overlay fique por cima de outros conteúdos */
-
 }
 
+.modalcard {
+    background-color: rgb(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modal-options {
+    display: flex;
+    gap: 2em;
+}
 form {
     display: flex;
     flex-direction: column;
-    
     gap: 1rem;
     width: 600px;
     padding: 2rem;
@@ -24,14 +32,27 @@ form {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+.formHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    
+    i {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+    }
+}
 label {
     width: 100%;
 }
-.form-group {
+.formGroup {
     display: flex;
     gap: 1rem;
 }
-.input-group {
+.inputGroup {
     display: grid;
     grid-template-columns: 1fr; /* Garante que o input ocupa 1 fração do espaço */
 
@@ -43,8 +64,8 @@ input {
     border-radius: 4px;
 }
 
-.input-group input,
-.input-group select {
+.inputGroup input,
+.inputGroup select {
     height: 2.5rem;
     width: 100%;
     border: #d4d4d4 solid 1px;
@@ -52,10 +73,10 @@ input {
 }
 
 
-.form-actions {
+.formActions {
     display: flex;
     justify-content: space-around;
-    padding-top: 5rem;
+    padding-top: 2rem;
 }
 
 button {
@@ -83,9 +104,18 @@ button[type="button"] {
     text-align: center;
 }
 
+.textarea {
+    width: 100%;
+    height: 8rem;
+    border: #d4d4d4 solid 1px;
+    border-radius: 4px;
+    resize: none;
+}
+
 select {
     -webkit-appearance: none;
     -moz-appearance: none;
     text-indent: 1px;
     text-overflow: '';
   }
+  

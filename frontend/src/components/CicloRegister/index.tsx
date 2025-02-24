@@ -1,21 +1,23 @@
-import './styles.css';
+import './styles.module.css';
+import styles from './styles.module.css';
 import { FC, FormEvent, useState } from 'react';
 import { NovoRegistro } from './novoRegistro';
 import TimeInput from './TimeInput';
+import { CicloTableItem } from '../../data/cicloTableItem';
 
 
 type CicloRegisterProps = {
     isOpen: boolean;
     onClose: () => void;
     onSave: (novoRegistro: NovoRegistro) => void;
-    itemId: number | null;
+    item: CicloTableItem;
     secondsDone: number;
 }
 
-export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onSave, itemId, secondsDone }) => {
+export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onSave, item, secondsDone }) => {
     const padraoDate = new Date();
     const [date, setDate] = useState(padraoDate.toISOString().split('T')[0]);
-    if (!isOpen || itemId === null) {
+    if (!isOpen || item === null) {
         return null;
     }
 
@@ -29,11 +31,11 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onSave,
         const form = event.target as HTMLFormElement;
 
         const novoRegistro: NovoRegistro = {
-            id: itemId,
+            id: item.id,
             data: form.date.value,
-            inicio: Date.now(),
-            fim: "12:59",
-            materia: form.materia.value,
+            inicio: new Date(),
+            fim: new Date(),
+            materia: item.materia,
             horasPausa: form.horasPausa.value,
             horasFeitas: form.horasLiquidas.value,
             tags: form.tags.value,
@@ -50,43 +52,46 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onSave,
     }
 
     return (
-        <div className='ciclo-register'>
+        <div className={styles.cicloRegister}>
             <div>
-                <form onSubmit={handleSubmit}>
-                    <h1>Registrar</h1>
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <div className={styles.formHeader}>
+                        <i className="fa-regular fa-book-open-cover" />
+                        <h1>Registrar</h1>
+                    </div>
                     <span>Insira informações sobre</span>
-                    <div className="form-group">
+                    <div className={styles.formGroup}>
                         <label>
-                            <div className="input-group">
+                            <div className={styles.inputGroup}>
                                 <span>Data</span>
                                 <input type="date" placeholder="Selecione a data" name="date" value={date} onChange={handleDateChange} />
                             </div>
                         </label>
                         <label>
-                            <div className="input-group">
+                            <div className={styles.inputGroup}>
                                 <span>Liquido (hh:mm:ss)</span>
                                 <TimeInput initialTime={secondsDone} />
                             </div>
                         </label>
                         <label>
-                            <div className="input-group">
+                            <div className={styles.inputGroup}>
                                 <span>Pausa</span>
                                 <input type="number" placeholder="Digite o tempo de pausa" name="horasPausa" />
 
                             </div>
-                        </label>
-                    </div>
-                    <div className='form-group'>
+                        </label >
+                    </div >
+                    <div className={styles.formGroup}>
                         <label>
-                            <div className="input-group">
+                            <div className={styles.inputGroup}>
                                 <span>Matéria</span>
-                                <input type="text" placeholder="Digite a matéria" name="materia" />
+                                <input type="text" placeholder={item.materia} disabled name="materia" />
                             </div>
-                        </label>
-                    </div>
-                    <div className='form-group'>
+                        </label >
+                    </div >
+                    <div className={styles.formGroup}>
                         <label>
-                            <div className="input-group">
+                            <div className={styles.inputGroup}>
                                 <span>Método de estudo</span>
                                 <select name="metodo" id="metodo" required>
 
@@ -98,11 +103,11 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onSave,
                                     <option value="simulado">Simulado</option>
                                 </select>
                             </div>
-                        </label>
-                    </div>
-                    <div className='form-group'>
+                        </label >
+                    </div >
+                    <div className={styles.formGroup}>
                         <label>
-                            <div className="input-group">
+                            <div className={styles.inputGroup}>
                                 <span>Tags</span>
                                 <select name="tags" id="tags">
                                     <option value="">Selecione a tag</option> {/* Placeholder no select */}
@@ -114,52 +119,60 @@ export const CicloRegister: FC<CicloRegisterProps> = ({ isOpen, onClose, onSave,
                                     <option value="simulado">Simulado</option>
                                 </select>
                             </div>
-                        </label>
-                    </div>
-                    <div className="form-group">
-                        <label>
-                            <div className="input-group">
-                                <span>Exercícios feitos</span>
+                        </label >
+                    </div >
+                    <div className={styles.formGroup}>
+                        < label >
+                            <div className={styles.inputGroup}>
+                                < span > Exercícios feitos</span >
                                 <input type="number" placeholder="Digite o número de exercícios" name="exerciciosFeitos" />
-                            </div>
-                        </label>
+                            </div >
+                        </label >
                         <label>
-                            <div className="input-group">
+                            <div className={styles.inputGroup}>
                                 <span>Acertos</span>
                                 <input type="number" placeholder="Digite o número de acertos" name="exerciciosAcertos" />
                             </div>
-                        </label>
-                    </div>
-                    <div className="form-group">
-                        <label>
-                            <div className="input-group">
-                                <span>Foco</span>
+                        </label >
+                    </div >
+                    <div className={styles.formGroup}>
+                        < label >
+                            <div className={styles.inputGroup}>
+                                < span > Foco</span >
                                 <input type="range" min="1" max="5" step="0.5" name="foco" /> {/* Range não tem placeholder */}
-                            </div>
-                        </label>
+                            </div >
+                        </label >
                         <label>
-                            <div className="input-group">
+                            <div className={styles.inputGroup}>
                                 <span>Produtividade</span>
-                                <input type="range" min="1" max="5" step="0.5" name="produtividade" /> {/* Range não tem placeholder */}
-                            </div>
-                        </label>
-                    </div>
-                    <div className='form-group'>
-                        <label>
-                            <div className="input-group">
-                                <span>Anotações</span>
-                                <textarea placeholder="Digite suas anotações" name="anotacoes"></textarea>
-                            </div>
-                        </label>
-                    </div>
-                    <div className="form-actions">
-                        <button type="button" onClick={onClose}>Cancel</button>
-                        <button type="submit">Registrar</button>
-                    </div>
 
-                </form>
-            </div>
-        </div>
+                                <div>
+                                    <input type="radio" id="produtividade1" name="produtividade" value="1" />
+                                    <label htmlFor="produtividade1">1</label>
+
+                                </div>
+
+
+
+                            </div>
+                        </label >
+                    </div >
+                    <div className={styles.formGroup}>
+                        <label>
+                            <div className={styles.inputGroup}>
+                                <span>Anotações</span>
+                                <textarea className={styles.textarea} placeholder="Digite suas anotações" name="anotacoes"></textarea>
+                            </div>
+                        </label >
+                    </div >
+                    <div className={styles.formActions}>
+                        < button type="button" onClick={onClose} > Cancel</button >
+                        <button type="submit">Registrar</button>
+                    </div >
+
+                </form >
+            </div >
+        </div >
     );
 };
 
