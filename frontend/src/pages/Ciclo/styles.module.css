@@ -175,10 +175,15 @@ hr {
 
 progress {
     width: 60%;
-    height: 1.5rem;
+    height: 1rem;
     border-radius: 0.625rem;
+    
 }
-
+.progressTitle {
+    font-size: 1rem;
+    color: #333333;
+    text-align: center;
+}
 progress::-webkit-progress-bar {
     background-color: rgba(170, 170, 170, 0.1);
     border-radius: 0.625rem;
@@ -193,44 +198,77 @@ progress::-moz-progress-bar {
 }
 
 
-.pgbar-low::-moz-progress-bar {
-    background: var(--primary-color);
+.pgbarlow::-moz-progress-bar {
+    background: rgb(137, 36, 71, 0.5);
 }
 
-.pgbar-low::-webkit-progress-value {
-    background: var(--primary-color);
+.pgbarlow::-webkit-progress-value {
+    background: rgb(137, 36, 71, 0.5);
 }
 
-.pgbar-medium::-moz-progress-bar {
-    background: var(--primary-color);
+.pgbarmedium::-moz-progress-bar {
+    background: rgb(137, 36, 71, 0.6);
 }
 
-.pgbar-medium::-webkit-progress-value {
-    background: var(--primary-color);
+.pgbarmedium::-webkit-progress-value {
+    background: rgb(137, 36, 71, 0.6);
 }
 
-.pgbar-high::-moz-progress-bar {
-    background: var(--primary-color);
+.pgbarhigh::-moz-progress-bar {
+    background: rgb(137, 36, 71, 0.9);
 }
 
-.pgbar-high::-webkit-progress-value {
-    background: var(--primary-color);
+.pgbarhigh::-webkit-progress-value {
+    background: rgb(137, 36, 71, 0.9);
 }
 
-.pgbar-completed::-moz-progress-bar {
-    background: var(--primary-color);
+.pgbarcompleted::-moz-progress-bar {
+    background: rgb(214, 99, 99);
 }
 
-.pgbar-completed::-webkit-progress-value {
-    background: var(--primary-color);
+.pgbarcompleted::-webkit-progress-value {
+    background: rgb(214, 99, 99);
 }
 
 @media (max-width: 768px) {
     .sidebar {
         display: none;
         /* Oculta o sidebar em telas menores que 768px */
-
     }
+}
 
+.modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+    width: 30rem;
+    height: 15rem;
+    border-radius: 0.5rem;
+    background-color: var(--secondary-color);
+}
+
+.modal-content h2 {
+    font-size: 1.5rem;
+    color: #333333;
+}
+
+.modal-options {
+    gap: 2rem;
+    display: flex;
 }
