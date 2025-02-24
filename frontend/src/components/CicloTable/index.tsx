@@ -35,7 +35,6 @@ export const CicloTable = () => {
         console.log("Modal aberto", id);
     };
 
-    // callBack foi usado pois nao ha necessidade de recriar a funcao a cada renderizacao se ela nao mudar
     const handleRegisterOption = useCallback(
         (option: "manual" | "stopwatch") => () => {
             setStep(option === 'manual' ? 'register' : 'stopwatch');
@@ -46,19 +45,23 @@ export const CicloTable = () => {
 
     const handleSaveRegistro = useCallback((novoRegistro: NovoRegistro) => {
         setDadosTabela((prevDados) =>
-            prevDados.map((item) =>
-                item.id === novoRegistro.id
-                    ? {
-                        ...item,
-                        horasRealizadas: timeSecondsToString(
-                            timeStringToSeconds(item.horasRealizadas) + parseInt(novoRegistro.horasFeitas)
-                        ),
-                        progresso:
-                            (timeStringToSeconds(item.horasRealizadas) + parseInt(novoRegistro.horasFeitas)) /
-                            timeStringToSeconds(item.horasMeta),
-                    }
-                    : item
-            )
+            prevDados.map((item) => {
+                if (item.id !== novoRegistro.id) return item;
+                const secondsItemHorasRealizadas = timeStringToSeconds(item.horasRealizadas);
+                const secondsRegistroHorasFeitas = timeStringToSeconds(novoRegistro.horasFeitas);
+
+                const horasAtualizadas = secondsItemHorasRealizadas + secondsRegistroHorasFeitas;
+                const progressoAtualizado = (horasAtualizadas / timeStringToSeconds(item.horasMeta));
+                const horasAtualizadasFormatadas = timeSecondsToString(horasAtualizadas);
+
+                return {
+                    ...item,
+                    horasRealizadas: horasAtualizadasFormatadas,
+                    progresso:
+                        progressoAtualizado,
+                };
+
+            })
         );
     }, []);
 
@@ -82,43 +85,39 @@ export const CicloTable = () => {
         }
     }, [step]);
 
-    useEffect(() => {
-        console.log("Opção selecionada", step);
-    }, [step]);
-
+    
     const getProgressClass = (progresso: number) => {
-        if (progresso < 0.3) return "pgbar-low";
-        if (progresso < 0.7) return "pgbar-medium";
-        if (progresso < 1) return "pgbar-high";
-        return "pgbar-completed";
+        if (progresso < 0.3) return styles.pgbarlow;
+        if (progresso < 0.7) return styles.pgbarmedium;
+        if (progresso < 1) return styles.pgbarhigh;
+        return styles.pgbarcompleted;
     };
 
     return (
-        <div className={styles["table-responsive ciclo-table"]}> {/* Use styles */}
-            <table className={styles.table}> {/* Use styles */}
+        <div className={styles["table-responsive ciclo-table"]}>
+            <table className={styles.table}>
                 <thead>
                     <tr>
-                        <th className={styles.th} style={{ width: '10%' }}>Iniciar</th> {/* Use styles para th */}
+                        <th className={styles.th} style={{ width: '10%' }}>Iniciar</th>
                         <th scope="col" className={styles.th} style={{ width: '20%' }}>Matéria</th>
                         <th scope="col" className={styles.th} style={{ width: '25%' }}>Horas feitas</th>
                         <th scope="col" className={styles.th} style={{ width: '30%' }}>Progresso</th>
                         <th scope="col" className={styles.th} style={{ width: '10%' }}>Tags</th>
                     </tr>
                 </thead>
-
                 <tbody>
                     {dadosTabela.map((item) => (
-                        <tr key={item.id} className={styles.tr}> {/* Use styles para tr */}
-                            <td className={styles.td}> {/* Use styles para td */}
-                                <button onClick={() => openModal(item.id)} className={styles.button}> {/* Use styles para button */}
+                        <tr key={item.id} className={styles.tr}>
+                            <td className={styles.td}>
+                                <button onClick={() => openModal(item.id)} className={styles.button}>
                                     <i className="fa-solid fa-play" />
                                 </button>
                             </td>
                             <td className={styles.td}>{item.materia}</td>
                             <td className={styles.td}>{item.horasRealizadas}/{item.horasMeta}</td>
                             <td className={styles.td}>
-                                <h5 className={styles.progressPercentage}>{(item.progresso * 100).toPrecision(2)}%</h5> {/* Use styles para a porcentagem */}
-                                <progress value={item.progresso} max={1} className={`${styles.progress} ${getProgressClass(item.progresso)}`} /> {/* Use styles para a barra de progresso */}
+                                <h5 className={styles.progressTitle}>{(item.progresso * 100).toFixed(0)}%</h5>
+                                <progress value={item.progresso} max={1} className={`${styles.progress} ${getProgressClass(item.progresso)}`} />
                             </td>
                             <td className={styles.td}>{item.tags}</td>
                         </tr>
@@ -127,11 +126,13 @@ export const CicloTable = () => {
             </table>
 
             {isModalOpen && (
-                <div className={`${styles["ciclo-register"]} ${styles.modalcard}`}> {/* Use styles para as classes do modal */}
-                    <h3 className={styles.modalTitle}>Como deseja registrar o tempo?</h3> {/* Use styles para o título do modal */}
-                    <div className={styles["modal-options"]}>
-                        <button onClick={handleRegisterOption("manual")} className={styles.modalButton}>Manualmente</button> {/* Use styles para os botões do modal */}
-                        <button onClick={handleRegisterOption("stopwatch")} className={styles.modalButton}>Cronometrar</button>
+                <div className={styles.modal}>
+                    <div className={styles["modal-content"]}>
+                        <h2>Como deseja registrar o tempo?</h2>
+                        <div className={styles["modal-options"]}>
+                            <button onClick={handleRegisterOption("manual")} className={styles.modalButton}>Manualmente</button>
+                            <button onClick={handleRegisterOption("stopwatch")} className={styles.modalButton}>Cronometrar</button>
+                        </div>
                     </div>
                 </div>
             )}
