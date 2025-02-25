@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 import { CicloGraph } from "../../components/CicloGraph";
 import { SideBar } from "../../components/SideBar";
 import { CicloTable } from "../../components/CicloTable";
+import { Link } from "react-router-dom";
 
 export const Ciclo = () => {
     const [progress, setProgress] = useState(0);
@@ -90,8 +91,16 @@ export const Ciclo = () => {
                 </div>
 
                 <hr className={styles.hr} /> {/* Adicione estilos para a linha hr, se necessário */}
-
                 <CicloTable />
+
+                <div className={styles["d-flex justify-content-center"]}>
+                    <Link to="/plano">
+                        <div className={"btn btn-primary"}>
+                            <i className="fa-duotone fa-light fa-plus" />
+                            <span>Ajustes</span>
+                        </div>
+                    </Link>
+                </div>
             </div>
         </>
     );
