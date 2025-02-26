@@ -6,6 +6,10 @@
     min-height: 100vh;
 }
 
+.graph-container {
+    display: flex;
+    width: 60%;
+}
 .cards-group {
     display: flex;
     gap: 20px;
@@ -14,6 +18,112 @@
     max-width: calc(3 * (20rem + 20px)); /* Limita a largura a 3 cards + gaps */
 
 }
+
+.card {
+    background-color: white;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    max-width: 24rem;
+    margin: 0 auto;
+  }
+  
+  .header-container {
+    position: relative;
+  }
+  
+  .header-gradient {
+    background: linear-gradient(to right, #3b82f6, #8b5cf6);
+    padding: 2rem;
+  }
+  
+  .content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .icon-container {
+    background-color: white;
+    border-radius: 50%;
+    padding: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-right: 1rem;
+  }
+  
+  .clock-icon {
+    color: #3b82f6;
+  }
+  
+  .time-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .hours-text {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+  }
+  
+  .subtitle-text {
+    color: white;
+    font-weight: 500;
+    margin: 0.25rem 0 0 0;
+  }
+  
+  .wave-decoration {
+    position: absolute;
+    height: 1rem;
+    width: 100%;
+    background-color: white;
+    border-top-left-radius: 100%;
+    border-top-right-radius: 100%;
+    bottom: -0.5rem;
+  }
+  
+  .content-section {
+    padding: 1.5rem;
+    padding-top: 1rem;
+  }
+  
+  .info-box {
+    background-color: #eff6ff;
+    padding: 1rem;
+    border-radius: 0.375rem;
+  }
+  
+  .info-title {
+    font-size: 0.875rem;
+    color: #374151;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  
+  .feature-list {
+    font-size: 0.75rem;
+    color: #4b5563;
+    padding-left: 1rem;
+    margin: 0;
+  }
+  
+  .feature-list li {
+    margin-bottom: 0.25rem;
+  }
+  
+  .footer-section {
+    margin-top: 1rem;
+    padding-top: 0.5rem;
+  }
+  
+  .footer-text {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin: 0;
+  }
+
+
 
 .subject-card {
     width: 20rem;

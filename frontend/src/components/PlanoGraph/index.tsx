@@ -3,13 +3,16 @@ import { useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import { planoElements } from "../../data/planoElements";
 
-const convertTimeToSeconds = (time: string): number => {
+const convertStringToSeconds = (time: string): number => {
     const [hours, minutes] = time.split(":").map(Number);
     return hours * 3600 + minutes * 60;
 };
 
 export const PlanoGraph = () => {
-   
+    const [dadosTabela, setDadosTabela] = useState(planoElements);
+
+    const labels = dadosTabela.map(item => item.materia);
+    const series = dadosTabela.map(item => item.sessoes.map(sessao => convertStringToSeconds(sessao.tempo)).reduce((acc, curr) => acc + curr, 0));
     const options: ApexOptions = {
         chart: {
             type: 'bar',
@@ -26,23 +29,21 @@ export const PlanoGraph = () => {
             enabled: false
         },
         xaxis: {
-            categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
-                'United States', 'China', 'Germany'
-            ],
+            categories: labels,
         },
 
-        series: [{
-            data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
-        }],
+        series: series,
     };
 
 
     return (
-        <ReactApexChart
-            options={options}
-            series={options.series}
-            type='bar'
-            height={350}
-        />
+        <div style={{ width: '100%' }}>
+            <ReactApexChart
+                options={options}
+                series={[{ data: series }]}
+                type='bar'
+                height={350}
+            />
+        </div>
     );
 };
