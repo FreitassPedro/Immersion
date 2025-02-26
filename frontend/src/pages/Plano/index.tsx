@@ -1,3 +1,4 @@
+import { PlanoGraph } from '../../components/PlanoGraph';
 import styles from './styles.module.css';
 
 
@@ -5,7 +6,7 @@ export const Plano = () => {
     return (
         <div>
             <h1>PlanoConfig</h1>
-
+            <PlanoGraph />
             <div className={styles.container}>
 
                 <div className={styles["cards-group"]}>
