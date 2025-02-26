@@ -9,26 +9,11 @@ export const Plano = () => {
             <div className={styles["graph-container"]}>
                 <PlanoGraph />
                 <div className={styles["card"]}>
-                    {/* Design da parte superior */}
                     <div className={styles["header-container"]}>
                         <div className={styles["header-gradient"]}>
                             <div className={styles["content-wrapper"]}>
                                 <div className={styles["icon-container"]}>
-                                    <svg
-                                        className={styles["clock-icon"]}
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="32"
-                                        height="32"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    >
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <polyline points="12 6 12 12 16 14"></polyline>
-                                    </svg>
+                                    <i className="fa-light fa-clock" />
                                 </div>
                                 <div className={styles["time-container"]}>
                                     <h2 className={styles["hours-text"]}>24h</h2>
@@ -36,11 +21,8 @@ export const Plano = () => {
                                 </div>
                             </div>
                         </div>
-                        {/* Detalhe decorativo */}
-                        <div className={styles["wave-decoration"]}></div>
+                        <div className={styles["wave-decoration"]} />
                     </div>
-
-                    {/* Conteúdo */}
                     <div className={styles["content-section"]}>
                         <div className={styles["info-box"]}>
                             <p className={styles["info-title"]}>
@@ -53,7 +35,6 @@ export const Plano = () => {
                                 <li>Estabelecer metas de aprendizado</li>
                             </ul>
                         </div>
-
                         <div className={styles["footer-section"]}>
                             <p className={styles["footer-text"]}>
                                 Configure suas sessões de estudo e mantenha-se focado para alcançar seus objetivos de aprendizado de forma eficiente.
@@ -61,10 +42,46 @@ export const Plano = () => {
                         </div>
                     </div>
                 </div>
-
+                
+            </div>
+            <div className={styles["modal-container"]}>
+                <div className={styles["modal-content"]}>
+                    <h2>Ajuste seu ciclo</h2>
+                    <div className={styles["modal-box"]}>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th><div className={styles["tab-th"]}>Dificuldade</div></th>
+                                    <th><div className={styles["tab-th"]}>Peso</div></th>
+                                    <th><div className={styles["tab-th"]}>Quantia contéudo</div></th>
+                                    <th><div className={styles["tab-th"]}>Recomendado</div></th>
+                                    <th><div className={styles["tab-th"]}>Planejado</div></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><div className={styles["modal-header"]}>Algebra Linear</div></td>
+                                    <td><input className={styles["input-group"]} type="number" placeholder="1-5" /></td>
+                                    <td><input className={styles["input-group"]} type="number" placeholder="1-5" /></td>
+                                    <td><input className={styles["input-group"]} type="number" placeholder="1-5" /></td>
+                                    <td><input className={`${styles["input-group"]} ${styles["input-disabled"]}`} type="number" placeholder="x Horas" disabled /></td>
+                                    <td><input className={`${styles["input-group"]} ${styles["input-disabled"]}`} type="number" placeholder="Horas" readOnly /></td>
+                                </tr>
+                                <tr>
+                                    <td><div className={styles["modal-header"]}>Matemática</div></td>
+                                    <td><input className={styles["input-group"]} type="number" placeholder="1-5" /></td>
+                                    <td><input className={styles["input-group"]} type="number" placeholder="1-5" /></td>
+                                    <td><input className={styles["input-group"]} type="number" placeholder="1-5" /></td>
+                                    <td><input className={`${styles["input-group"]} ${styles["input-disabled"]}`} type="number" placeholder="x Horas" disabled /></td>
+                                    <td><input className={`${styles["input-group"]} ${styles["input-disabled"]}`} type="number" placeholder="Horas" readOnly /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div className={styles.container}>
-
                 <div className={styles["cards-group"]}>
                     <div className={styles["subject-card"]}>
                         <div className={styles["subject-header"]}>
@@ -74,7 +91,7 @@ export const Plano = () => {
                                 <span>02:30</span>
                             </div>
                         </div>
-                        <div className={styles["sessions-container"]}>
+                        <div className={styles["sessions-content"]}>
                             <div className={styles["session-card"]}>1h</div>
                             <div className={styles["session-card"]}>1h 20min</div>
                             <div className={styles["session-card"]}>1h 20min</div>
@@ -89,7 +106,7 @@ export const Plano = () => {
                                 <span>02:30</span>
                             </div>
                         </div>
-                        <div className={styles["sessions-container"]}>
+                        <div className={styles["sessions-content"]}>
                             <div className={styles["session-card"]}>1h</div>
                             <div className={styles["session-card"]}>1h 20min</div>
                             <div className={styles["session-card"]}>1h 20min</div>
@@ -108,7 +125,7 @@ export const Plano = () => {
                                 <span>02:30</span>
                             </div>
                         </div>
-                        <div className={styles["sessions-container"]}>
+                        <div className={styles["sessions-content"]}>
                             <div className={styles["session-card"]}>1h</div>
                             <div className={styles["session-card"]}>1h 20min</div>
                             <div className={styles["session-card"]}>1h 20min</div>
@@ -123,16 +140,14 @@ export const Plano = () => {
                                 <span>02:30</span>
                             </div>
                         </div>
-                        <div className={styles["sessions-container"]}>
+                        <div className={styles["sessions-content"]}>
                             <div className={styles["session-card"]}>1h</div>
                             <div className={styles["session-card"]}>1h 20min</div>
                             <div className={styles["session-card"]}>1h 20min</div>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
     )
 }
