@@ -68,8 +68,8 @@ header h1 {
 
 .dashboard-header .icon {
     background-color: rgba(255, 255, 255, 0.2);
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -77,19 +77,27 @@ header h1 {
     margin-right: 16px;
 }
 
-.dashboard-header .info h2 {
-    font-size: 32px;
+.dashboard-header h2 {
+    font-size: 2rem;
     font-weight: 700;
     margin-bottom: 4px;
+    text-align: center;
+
 }
 
-.dashboard-header .info p {
+.dashboard-header p {
     font-size: 16px;
     opacity: 0.9;
 }
 
 .dashboard-content {
     padding: 20px;
+    flex: 1;
+}
+
+.dashboard-title {
+
+    justify-items: self-start;
 }
 
 .feature-list {
@@ -108,7 +116,7 @@ header h1 {
     content: "•";
     color: var(--primary-color);
     font-weight: bold;
-    display: inline-block; 
+    display: inline-block;
     width: 1em;
     margin-left: -1em;
 }
@@ -225,19 +233,26 @@ header h1 {
 }
 
 /* Study Cards */
-.cards-container {
+.studycards-container {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
     margin-bottom: 24px;
+    max-width: calc(3 * (24rem + 20px));
+    margin: 0 auto;
 }
 
 .study-card {
     background-color: var(--white);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
-    flex: 1;
     overflow: hidden;
     border-top: 4px solid var(--primary-color);
+    width: calc(33.33% - 20px);
+    /* Define a largura dos cartões para que três caibam em uma linha */
+    min-width: 18rem;
+    margin: 0 auto;
+    /* Centraliza os cartões dentro do contêiner */
 }
 
 .study-card-header {
@@ -262,9 +277,6 @@ header h1 {
 
 .study-card-content {
     padding: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .time-input {
@@ -274,11 +286,118 @@ header h1 {
     border-radius: var(--border-radius);
     text-align: center;
     font-size: 18px;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
 }
 
 .time-footer {
     font-size: 14px;
     color: var(--dark-gray);
     margin-top: 10px;
+    text-align: center;
+}
+
+/* Novo Componente de Sessões */
+.sessions-manager {
+    margin-top: 16px;
+    border-top: 1px dashed var(--medium-gray);
+    padding-top: 16px;
+}
+
+.sessions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.sessions-header h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.sessions-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.session-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: var(--light-gray);
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.session-item:last-child {
+    margin-bottom: 0;
+}
+
+.session-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.session-details {
+    font-size: 12px;
+    color: var(--dark-gray);
+    display: flex;
+    gap: 8px;
+}
+
+.session-detail {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.session-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.session-btn {
+    background: none;
+    border: none;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.session-btn:hover {
+    background-color: var(--medium-gray);
+}
+
+.add-session-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    border: 2px dashed var(--medium-gray);
+    border-radius: 8px;
+    background: none;
+    color: var(--dark-gray);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: all 0.2s;
+}
+
+.add-session-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.add-session-icon {
+    margin-right: 8px;
 }
