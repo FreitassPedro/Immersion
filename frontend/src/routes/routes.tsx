@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { HomePage } from '../pages/Home';
 import { Ciclo } from '../pages/Ciclo';
 import { SideBar } from '../components/SideBar';
+import { Plano } from '../pages/Plano';
 import CicloHistory from '../components/CicloHistory';
 
 export const AppRoutes = () => {
@@ -15,6 +16,7 @@ export const AppRoutes = () => {
                 <Route path="/sidebar" element={<SideBar />} />
                 <Route path="/registro" element={<CicloHistory />} />
 
+            <Route path="/plano" element={<Plano />} />
                 <Route path="*" element={<Navigate to="/home" />} />
             </Routes>
         </BrowserRouter>
