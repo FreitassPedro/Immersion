@@ -4,78 +4,115 @@ import ReactApexChart from "react-apexcharts";
 import { planoElements } from "../../data/planoElements";
 
 import styles from '../../pages/Plano/styles.module.css';
+
 const convertStringToSeconds = (time: string): number => {
     const [hours, minutes] = time.split(":").map(Number);
     return hours * 3600 + minutes * 60;
+};
+
+const convertSecondsToTime = (seconds: number): string => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    return `${hours}h${minutes}m`;
 };
 
 export const PlanoGraph = () => {
     const [dadosTabela, setDadosTabela] = useState(planoElements);
 
     const labels = dadosTabela.map(item => item.materia);
-    const series = dadosTabela.map(item => item.sessoes.map(sessao => convertStringToSeconds(sessao.tempo)).reduce((acc, curr) => acc + curr, 0));
+    const seriesData = dadosTabela.map(item => item.sessoes.map(sessao => convertStringToSeconds(sessao.tempo)).reduce((acc, curr) => acc + curr, 0));
     const options: ApexOptions = {
         chart: {
             type: 'bar',
             height: 350
         },
+        colors: ['#4e7bfe'],
         plotOptions: {
             bar: {
-                borderRadius: 4,
-                borderRadiusApplication: 'end',
+                borderRadius: 10,
+                borderRadiusApplication: 'around',
                 horizontal: true,
+                barHeight: '75%',
+                dataLabels: {
+                    position: 'center', // Posição das palavras dentro das colunas
+                }
             }
         },
+        grid: {
+            show: false,
+        },
         dataLabels: {
-            enabled: false
+            enabled: true,
+            formatter: function (val, opt) {
+                return labels[opt.dataPointIndex]; // Exibe as palavras das categorias dentro das colunas
+            },
+            style: {
+                colors: ['#ffffff'],
+                fontSize: '14px',
+                fontFamily: 'Segoe UI',
+                fontWeight: 600,
+            },
         },
         xaxis: {
             categories: labels,
+            axisBorder: {
+                show: false, // Esconde a borda do eixo X
+            },
+            labels: {
+                formatter: function (val) {
+                    return convertSecondsToTime(val); // Converte os valores para "datas personalizadas"
+                }
+            }
+            
         },
-
-        series: series,
+        yaxis: {
+            show: false, // Esconde o eixo Y
+            labels: {
+                formatter: function (val) {
+                    return convertSecondsToTime(val); // Converte os valores para "datas personalizadas"
+                }
+            }
+        },
+        fill: {
+            colors: ['#6c5ce7', '#4e7bfe'],
+            type: 'gradient',
+            gradient: {
+                shade: 'dark',
+                type: "horizontal",
+                shadeIntensity: 0.5,
+                gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
+                inverseColors: false,
+                opacityFrom: 1,
+                opacityTo: 1,
+                stops: [0, 60, 100],
+                colorStops: []
+            }
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return convertSecondsToTime(val); // Converte os valores para "datas personalizadas" na dica de ferramenta
+                }
+            },
+            x: {
+                formatter: function (val, opts) {
+                    return labels[opts.dataPointIndex]; // Exibe o nome da matéria na dica de ferramenta
+                }
+            }
+        },
+        series: [{
+            name: 'Tempo',
+            data: seriesData
+        }],
     };
-
 
     return (
         <>
-            <div className={styles["progress-graph"]}>
+            <div style={{ width: '100%' }} className={styles["progress-graph"]}>
                 <h2 className={styles.h2}>Distribuição do Tempo por Disciplina</h2>
-                <div className={styles["progress-bar"]}>
-                    <div className={styles.bar} style={{ width: '25%' }}></div>
-                    <span className={styles.label}>Matemática</span>
-                    <span className={styles.value}>25%</span>
-                </div>
-                <div className={styles["progress-bar"]}>
-                    <div className={styles.bar} style={{ width: '45%' }}></div>
-                    <span className={styles.label}>Química</span>
-                    <span className={styles.value}>45%</span>
-                </div>
-                <div className={styles["progress-bar"]}>
-                    <div className={styles.bar} style={{ width: '55%' }}></div>
-                    <span className={styles.label}>Biologia</span>
-                    <span className={styles.value}>55%</span>
-                </div>
-                <div className={styles["progress-bar"]}>
-                    <div className={styles.bar} style={{ width: '80%' }}></div>
-                    <span className={styles.label}>Física</span>
-                    <span className={styles.value}>80%</span>
-                </div>
-                <div className={styles["x-axis"]}>
-                    <span className={styles.span}>0</span>
-                    <span className={styles.span}>5000</span>
-                    <span className={styles.span}>10000</span>
-                    <span className={styles.span}>15000</span>
-                    <span className={styles.span}>20000</span>
-                    <span className={styles.span}>25000</span>
-                    <span className={styles.span}>30000</span>
-                </div>
-            </div>
-
-            <div style={{ width: '100%' }}>
                 <ReactApexChart
                     options={options}
-                    series={[{ data: series }]}
+                    series={[{ name: 'Tempo', data: seriesData }]}
                     type='bar'
                     height={350}
                 />

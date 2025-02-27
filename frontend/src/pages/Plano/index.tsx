@@ -7,12 +7,9 @@ import styles from './styles.module.css';
 export const Plano = () => {
     return (
         <div className={styles.container}>
-
-           <PlanoDashboard />
-
+            <PlanoDashboard />
             <PlanoGraph />
-            <StudyCards /> 
-
+            <StudyCards />
         </div>
     )
 }
