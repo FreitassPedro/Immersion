@@ -107,7 +107,6 @@
     align-items: center;
     text-decoration: none;
     color: var(--text-color);
-    padding: 12px;
     border-radius: var(--border-radius);
     transition: background-color var(--transition-speed);
   }
@@ -117,19 +116,19 @@
   }
   
   .menuLink i {
-    min-width: 32px;
-    height: 32px;
+    min-width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
-    margin-right: 12px;
+    font-size: 1.4rem;
     color: var(--primary-color);
   }
   
   .menuText {
     white-space: nowrap;
-    font-size: 16px;
+    font-weight: 400;
+    font-size: 18px;
     transition: opacity var(--transition-speed);
   }
   
@@ -145,6 +144,10 @@
     background: var(--primary-gradient);
     padding: 16px;
     border-radius: 12px 12px 0 0;
+  }
+  .hr {
+    border-top: solid 1px #4b4b4b;
+    width: 80%;
   }
   
   .userProfile {
