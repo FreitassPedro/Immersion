@@ -22,7 +22,9 @@ export const SideBar: React.FC = () => {
         </button>
       </div>
       
-      <div className={styles.divider}></div>
+      <div className={styles.divider}>
+        <hr className={styles.hr}/>
+      </div>
       
       <ul className={styles.menuList}>
         <li className={styles.menuItem}>
@@ -31,6 +33,7 @@ export const SideBar: React.FC = () => {
             <span className={styles.menuText}>Home</span>
           </a>
         </li>
+        <br />
 
         <li className={styles.menuItem}>
           <Link to="/ciclo" className={styles.menuLink}>
@@ -51,6 +54,13 @@ export const SideBar: React.FC = () => {
             <i className="fa-light fa-chart-line"></i>
             <span className={styles.menuText}>Desempenho</span>
           </a>
+        </li>
+
+        <li className={styles.menuItem}>
+          <Link to="/plano" className={styles.menuLink}>
+            <i className="fa-light fa-books"></i>
+            <span className={styles.menuText}>Ajustes</span>
+          </Link>
         </li>
 
         <li className={styles.menuItem}>
